@@ -1,0 +1,22 @@
+<!--components/cartitem/cartitem.wxml-->
+<view class="cart-item">
+	<view class="left">
+		<image class="cart-banner" src="{{item.banner}}" mode="scaleToFill"></image>
+	</view>
+	<view class="right">
+		<view class="name">
+			{{item.name}}
+		</view>
+		<view class="advance">
+			提前报名：<text class="advance-text">{{item.advance}}</text>
+		</view>
+		<view class="sale-and-price">
+			<view class="saled">
+				销量：{{item.saled}}
+			</view>
+			<view class="price">
+				￥{{item.saled}}
+			</view>
+		</view>
+	</view>
+</view>

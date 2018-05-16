@@ -1,0 +1,19 @@
+<!--pages/shopping-cart/shopping-cart.wxml-->
+<view class="cart-contaienr">
+	<!-- 筛选 -->
+	<view class="filter">
+		<block wx:for="{{filterItem}}" wx:for-index="idx" wx:for-item="item">
+			<view 
+				class="filter-item {{selectedItem == idx ? 'selected-item' : ''}}" 
+				data-idx="{{idx}}"
+				bind:tap="chooseFilter">
+				{{item}}
+			</view>
+		</block>
+	</view>
+	<view class="cart-list">
+		<block wx:for="{{list}}" wx:for-index="idx" wx:for-item="item">
+			<cartitem item="{{item}}"></cartitem>
+		</block>
+	</view>
+</view>

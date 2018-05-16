@@ -1,0 +1,73 @@
+<import src="../../static/libs/wxParse/wxParse.wxml"/>
+
+<view class="d-wrap">
+	<view class="intro">
+		<view class="banner">
+			<image class="banner-img" src="http://www.uu-club.com/public/images/upload/201805/04/14/71ca39b97bc9fda5189458e023b8ebb477.jpg" mode="scaleToFill"></image>
+			<text class="banner-number">线路编号：3333</text>
+		</view>
+
+		<view class="title">
+			{{ base.name }}
+		</view>
+
+		<view class="tags">
+			
+		</view>
+
+		<view class="sd">
+			<view class="saled">
+				<text class="real-price">
+					￥{{ base.price }}
+				</text>
+				<text class="up-price">
+					起
+				</text>
+			</view>
+			<view class="price">
+				销量：{{ base.sale }}
+			</view>
+		</view>
+
+		<view class="gray">
+			<view class="line"></view>
+		</view>
+
+		<view class="desc">
+			{{ base.brief }}
+		</view>
+	</view>
+
+	<view class="html-c">
+		<template is="wxParse" data="{{wxParseData:xc.nodes}}"/> 
+	</view>
+
+	<view class="html-c">
+		<template is="wxParse" data="{{wxParseData:yd.nodes}}"/> 
+	</view>
+
+	<view class="jg"></view>
+
+	<!-- 操作 -->
+	<view class="operation" wx:if="{{requestEnd}}">
+		<view class="cc">
+			<view class="cc-contact">
+				<button class="cs_button" open-type="contact" session-from="weapp">
+				</button> 
+				<image class="cc-icon we-icon" src="{{wechatIcon}}" mode="scaleToFill"></image>
+			</view>
+			<view class="cc-cart">
+				<image class="cc-icon" src="{{cartIcon}}" mode="scaleToFill"></image>
+			</view>
+		</view>
+		<view class="buy">
+			<button class="buy-btn">
+				预定购买
+			</button>
+		</view>
+	</view>
+</view>
+
+
+
+
