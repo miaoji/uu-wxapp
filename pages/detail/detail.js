@@ -101,6 +101,9 @@ Page({
         },
       })
       // 行程安排
+      tourDesc = tourDesc.replace('./public/', `${app.globalData.imageBase}/public/`);
+      appointDesc = appointDesc.replace('./public/', `${app.globalData.imageBase}/public/`);
+      console.log(appointDesc);
       WxParse.wxParse('xc', 'html', tourDesc, this, 5);
       WxParse.wxParse('yd', 'html', appointDesc, this, 5);
       this.setData({

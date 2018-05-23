@@ -102,6 +102,7 @@ page {
 	margin-top: 20rpx;
 	padding: 20rpx;
 	background-color: #FFF;
+	min-height: 200rpx;
 }
 
 .operation {

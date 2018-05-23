@@ -9,7 +9,7 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "1.9.94",
-	"appid": "wx0483bc87e42411c9",
+	"appid": "wx660c67ecf25170be",
 	"projectname": "uu-club",
 	"isGameTourist": false,
 	"condition": {
@@ -30,7 +30,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
+			"current": 4,
 			"list": [
 				{
 					"id": 0,
@@ -51,10 +51,15 @@
 					"query": ""
 				},
 				{
-					"id": -1,
+					"id": 3,
 					"name": "detail",
 					"pathName": "pages/detail/detail",
-					"query": ""
+					"query": "id=1763"
+				},
+				{
+					"id": -1,
+					"name": "testpay",
+					"pathName": "pages/testpay/testpay"
 				}
 			]
 		}
