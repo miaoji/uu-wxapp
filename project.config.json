@@ -57,9 +57,10 @@
 					"query": "id=1763"
 				},
 				{
-					"id": -1,
-					"name": "testpay",
-					"pathName": "pages/testpay/testpay"
+					"id": 4,
+					"name": "order",
+					"pathName": "pages/ordersuccess/ordersuccess",
+					"query": ""
 				}
 			]
 		}

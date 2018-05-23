@@ -1,8 +1,5 @@
 {
 	"usingComponents": {
     "cartitem": "../../components/cartitem/cartitem"
-  },
-  "backgroundTextStyle": "light",
-  "navigationBarTitleText": "旅优惠",
-  "navigationBarTextStyle": "#FFF"
+  }
 }

@@ -8,13 +8,14 @@
     "pages/citylist/citylist",
     "pages/detail/detail",
     "pages/search/search",
-    "pages/testpay/testpay"
+    "pages/testpay/testpay",
+    "pages/ordersuccess/ordersuccess"
   ],
   "window": {
-    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#70AAF4",
+    "backgroundTextStyle": "light",
     "navigationBarTitleText": "旅优惠",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "#FFF"
   },
   "tabBar": {
     "borderStyle": "white",
