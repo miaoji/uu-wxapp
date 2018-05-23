@@ -1,0 +1,46 @@
+/* pages/coupon/coupon.wxss */
+.list {
+	padding: 40rpx 20rpx 0 20rpx;
+}
+.item {
+	display: flex;
+	flex-direction: row;
+	height: 150rpx;
+	margin-bottom: 40rpx;
+	box-shadow: 0 2rpx 16rpx 0 rgba(53,53,53,0.2);
+}
+.left {
+	width: 520rpx;
+	height: 100%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}
+.amount {
+	font-size: 70rpx;
+	font-weight: bold;
+	margin-right: 20rpx;
+}
+.intro {
+	font-size: 24rpx;
+	color: #353535;
+}
+.right {
+	width: 200rpx;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 28rpx;
+	word-break: normal;
+	padding-left: 30rpx;
+}
+
+.active-bg {
+	background-image: url(https://p96r0a67g.bkt.clouddn.com/active-coupon.png);
+}
+
+.white-word {
+	color: #FFF;
+}
