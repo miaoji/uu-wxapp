@@ -5,8 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    filterItem: ['国内中长线', '国内短线', '爆款尾单'],
-    selectedItem: 0,
+    // filterItem: ['国内中长线', '国内短线', '爆款尾单'],
+    // selectedItem: 0,
     list: [
       {
         banner: '../../static/imgs/index/demo1.png',

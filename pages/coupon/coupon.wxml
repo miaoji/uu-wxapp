@@ -1,5 +1,5 @@
 <view class="list">
-	<view class="item {{item.status == 1 ? 'active-bg' : 'white-word'}}" wx:for="{{coupons}}" wx:key="">
+	<view class="item {{item.status == 1 ? 'active-bg' : 'f1f2f3 noactive-bg'}}" wx:for="{{coupons}}" wx:key="">
 		<view class="left">
 			<view class="amount">
 				￥{{ item.amount }}
@@ -10,7 +10,7 @@
 			</view>
 		</view>
 		<block wx:if="{{item.status == 1}}">
-			<view class="right white-word">
+			<view class="right white-word first-right">
 				有效期至
 				{{ item.expiry }}
 			</view>

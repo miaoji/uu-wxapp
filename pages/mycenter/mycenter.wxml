@@ -22,7 +22,7 @@
   			<image class="arrow-icon" src="{{arrowIcon}}" mode="scaleToFill"></image>
   		</view>
   	</view>
-    <view class="item">
+    <view class="item" bind:tap="handleCouponList">
       <view class="title">
         <image class="title-icon" src="{{orderIcon}}" mode="scaleToFill"></image>
         <text>优惠卡券</text>

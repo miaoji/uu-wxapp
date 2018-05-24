@@ -66,5 +66,11 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+
+  handleCouponList() {
+    wx.navigateTo({
+      url: '/pages/coupon/coupon'
+    })
   }
 })
