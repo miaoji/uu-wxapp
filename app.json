@@ -11,7 +11,8 @@
     "pages/testpay/testpay",
     "pages/ordersuccess/ordersuccess",
     "pages/coupon/coupon",
-    "pages/orderlist/orderlist"
+    "pages/orderlist/orderlist",
+    "pages/notusedorder/notusedorder"
   ],
   "window": {
     "navigationBarBackgroundColor": "#70AAF4",

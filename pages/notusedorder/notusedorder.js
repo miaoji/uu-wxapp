@@ -1,15 +1,42 @@
-// pages/mycenter/mycenter.js
+// pages/notusedorder/notusedorder.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    editImg: '../../static/imgs/index/demo6.png',
-    orderIcon: '../../static/imgs/center/icon1.png',
-    historyIcon: '../../static/imgs/center/icon2.png',
-    couponIcon: '../../static/imgs/center/icon3.png',
-    arrowIcon: '../../static/imgs/center/icon-arrow.png',
+    list: [
+      {
+        date: '05-23',
+        image: '../../static/imgs/orderlist/demo.png',
+        name: '上海浦东软件园20日游园20日园20日',
+        startDate: '05/20',
+        endDate: '05/28',
+        orderNo: '',
+        adult: '1',
+        child: '2'
+      },
+      {
+        date: '05-23',
+        image: '../../static/imgs/orderlist/demo.png',
+        name: '上海浦东软件园20日游园20日园20日',
+        startDate: '05/20',
+        endDate: '05/28',
+        orderNo: '',
+        adult: '1',
+        child: '2'
+      },
+    ],
+    nopaylist: [
+      {
+        date: '05-23',
+        name: '上海浦东软件园20日游园20日园20日',
+        startDate: '05/20',
+        endDate: '05/28',
+        orderNo: '',
+        price: '1900'
+      }
+    ]
   },
 
   /**
@@ -17,7 +44,7 @@ Page({
    */
   onLoad: function (options) {
     wx.setNavigationBarTitle({
-      title: '个人中心',
+      title: '未出行订单',
     })
   },
 
@@ -68,23 +95,5 @@ Page({
    */
   onShareAppMessage: function () {
   
-  },
-
-  handleCouponList() {
-    wx.navigateTo({
-      url: '/pages/coupon/coupon'
-    })
-  },
-
-  handleOrderList() {
-    wx.navigateTo({
-      url: '/pages/orderlist/orderlist'
-    })
-  },
-
-  handleNopayList() {
-    wx.navigateTo({
-      url: '/pages/notusedorder/notusedorder'
-    })
   }
 })

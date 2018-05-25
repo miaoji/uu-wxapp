@@ -1,0 +1,63 @@
+<!--pages/orderlist/orderlist.wxml-->
+<view class="list">
+	<view class="item nopay" wx:for="{{nopaylist}}">
+		<view class="date">
+			预订日期：{{ item.date }}
+		</view>
+		<view class="nopay-cared">
+			<view class="info">
+				<view class="name">
+					{{ item.name }}
+				</view>
+				<view class="datescope">
+					{{ item.startDate }} 出发 {{ item.endDate }} 返程
+				</view>
+				<view class="price">
+					<view class="price-word">
+						￥{{ item.price }}
+					</view>
+					<view>
+						未提交
+					</view>
+				</view>
+			</view>
+			<view class="option-pay">
+				<view class="cancel">
+					取消
+				</view>
+				<view class="submit">
+					继续预订
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class="item" wx:for="{{list}}">
+		<view class="date">
+			预订日期：{{ item.date }}
+		</view>
+		<view class="card">
+			<view class="img">
+				<image class="timage" src="{{ item.image }}" mode="scaleToFill"></image>
+			</view>
+			<view class="detail">
+				<view class="name">
+					{{ item.name }}
+				</view>
+				<view class="sdate">
+					{{ item.startDate }} 至 {{ item.endDate }}
+				</view>
+				<view class="sdate">
+					{{ item.adult }} 成人 {{ item.child }} 儿童
+				</view>
+				<view class="options">
+					<view class="delete">
+						已成交
+					</view>
+					<view class="view-detail" data-orderno="{{ item.orderNo }}" bind:tap="viewDetail">
+						订单详情
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+</view>
