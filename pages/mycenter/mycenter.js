@@ -5,10 +5,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    avatar: '../../static/imgs/index/demo6.png',
     editImg: '../../static/imgs/index/demo6.png',
     orderIcon: '../../static/imgs/center/icon1.png',
-    historyIcon: '../../static/imgs/center/icon1.png',
+    historyIcon: '../../static/imgs/center/icon2.png',
+    couponIcon: '../../static/imgs/center/icon3.png',
     arrowIcon: '../../static/imgs/center/icon-arrow.png',
   },
 
@@ -16,7 +16,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    wx.setNavigationBarTitle({
+      title: '个人中心',
+    })
   },
 
   /**
@@ -71,6 +73,12 @@ Page({
   handleCouponList() {
     wx.navigateTo({
       url: '/pages/coupon/coupon'
+    })
+  },
+
+  handleOrderList() {
+    wx.navigateTo({
+      url: '/pages/orderlist/orderlist'
     })
   }
 })

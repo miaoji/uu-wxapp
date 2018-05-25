@@ -1,5 +1,5 @@
 // put api list here
-const baseUrl = 'http://120.24.79.179:3030/api'
+const baseUrl = 'http://test.wwlin.cn/api'
 
 // 所有接口列表如下：
 const getHomeInfo = `${baseUrl}/home`;

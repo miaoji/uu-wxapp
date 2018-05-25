@@ -39,16 +39,30 @@
 
 .c-wx {
 	width: 100%;
-	position: absolute;
-	bottom: 30rpx;
 	left: 0;
 	pointer-events: none;
 }
 
 .wechat {
 	position: relative;
+	box-sizing: border-box;
+	overflow: hidden;
 }
 
 .phone {
 	background: linear-gradient(to bottom right, #6FBCF3 , #2993E7);
+}
+
+.wx_button {
+	/*opacity: 0;*/
+}
+
+.wx-content {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 20rpx;
+	left: 0;
+	z-index: 200;
+	pointer-events: none;
 }

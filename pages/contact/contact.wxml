@@ -1,12 +1,14 @@
 <!--pages/contact/contact.wxml-->
 <view class="c-wrap">
 	<view class="wechat c-item">
-		<button class="cs_button" open-type="contact" 		session-from="weapp">
-			<image class="c-icon" src="{{wechatIcon}}" mode="scaleToFill"></image>
+		<button class="cs_button wx_button" open-type="contact" session-from="weapp">
 		</button> 
-		<text class="c-text c-wx">
-			微信客服
-		</text>
+		<view class="wx-content">
+				<image class="c-icon" src="{{wechatIcon}}" mode="scaleToFill"></image>
+			<text class="c-text c-wx">
+				微信客服
+			</text>
+		</view>
 	</view>
 	<view class="phone c-item cs_button" bind:tap="calling">
 		<image class="c-icon" src="{{phoneIcon}}" mode="scaleToFill"></image>

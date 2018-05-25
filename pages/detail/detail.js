@@ -87,6 +87,9 @@ Page({
       let { id, name, image, brief, sale, price,
             city_id, tourTotalDay,city_name,
             tourDesc, appointDesc } = detail.tourline;
+      wx.setNavigationBarTitle({
+        title: name,
+      })
       this.setData({
         base: {
           id,

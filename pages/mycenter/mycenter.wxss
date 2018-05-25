@@ -10,7 +10,12 @@
 .avatar-img {
 	width: 150rpx;
 	height: 150rpx;
+	border: 1px solid #FFF;
 	border-radius: 50%;
+	display: block;
+	margin: 0 auto;
+	overflow: hidden;
+	object-fit: cover;
 }
 
 .list {
@@ -46,4 +51,21 @@
 .arrow-icon {
 	width: 44rpx;
 	height: 44rpx;
+}
+.wait-pay {
+	font-size: 26rpx;
+	color: #888;
+	padding-right: 15rpx;
+	position: relative;
+}
+.wait-pay:after {
+	content: '';
+	position: absolute;
+	right: 3rpx;
+	top: 0rpx;
+	width: 8rpx;
+	height: 8rpx;
+	background-color: #FF0000;
+	border-radius: 50%;
+	border: 1rpx solid #FF0000;
 }

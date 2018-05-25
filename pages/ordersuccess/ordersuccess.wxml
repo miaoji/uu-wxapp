@@ -67,7 +67,7 @@
 		<button class="cs_button" open-type="contact" session-from="weapp">
 		</button> 
 		<view class="contact-tip">
-			<!-- <image class="cc-icon we-icon" src="{{wechatIcon}}" mode="scaleToFill"></image> -->
+			<image class="cc-icon" src="{{contactIcon}}" mode="scaleToFill"></image>
 			<text>联系客服</text>
 		</view>
 	</view>

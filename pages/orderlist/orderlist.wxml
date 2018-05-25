@@ -1,0 +1,32 @@
+<!--pages/orderlist/orderlist.wxml-->
+<view class="list">
+	<view class="item" wx:for="{{list}}">
+		<view class="date">
+			预订日期：{{ item.date }}
+		</view>
+		<view class="card">
+			<view class="img">
+				<image class="timage" src="{{ item.image }}" mode="scaleToFill"></image>
+			</view>
+			<view class="detail">
+				<view class="name">
+					{{ item.name }}
+				</view>
+				<view class="sdate">
+					{{ item.startDate }} 至 {{ item.endDate }}
+				</view>
+				<view class="price">
+					<text class="price-text">￥{{ item.price }}</text> 已成交
+				</view>
+				<view class="options">
+					<view class="delete" data-orderno="{{ item.orderNo }}" bind:tap="deleteOrder">
+						删除
+					</view>
+					<view class="view-detail" data-orderno="{{ item.orderNo }}" bind:tap="viewDetail">
+						查看详情
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+</view>

@@ -124,3 +124,8 @@ page {
 	height: 100%;
 	font-size: 34rpx;
 }
+.cc-icon {
+	width: 44rpx;
+	height: 44rpx;
+	margin-right: 20rpx;
+}

@@ -10,7 +10,8 @@
     "pages/search/search",
     "pages/testpay/testpay",
     "pages/ordersuccess/ordersuccess",
-    "pages/coupon/coupon"
+    "pages/coupon/coupon",
+    "pages/orderlist/orderlist"
   ],
   "window": {
     "navigationBarBackgroundColor": "#70AAF4",

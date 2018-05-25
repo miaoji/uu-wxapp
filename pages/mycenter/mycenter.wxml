@@ -1,7 +1,7 @@
 <!--index.wxml-->
 <view class="center">
   <view class="avatar">
-  	<image class="avatar-img" src="{{avatar}}" mode="scaleToFill"></image>
+    <open-data type="userAvatarUrl" class="avatar-img"></open-data>
   </view>
   <view class="list">
   	<view class="item">
@@ -10,12 +10,13 @@
   			<text>未出行订单</text>
   		</view>
   		<view class="arrow">
+        <text class="wait-pay">待付款</text>
   			<image class="arrow-icon" src="{{arrowIcon}}" mode="scaleToFill"></image>
   		</view>
   	</view>
-  	<view class="item">
+  	<view class="item" bind:tap="handleOrderList">
   		<view class="title">
-  			<image class="title-icon" src="{{orderIcon}}" mode="scaleToFill"></image>
+  			<image class="title-icon" src="{{historyIcon}}" mode="scaleToFill"></image>
   			<text>历史订单</text>
   		</view>
   		<view class="arrow">
@@ -24,10 +25,11 @@
   	</view>
     <view class="item" bind:tap="handleCouponList">
       <view class="title">
-        <image class="title-icon" src="{{orderIcon}}" mode="scaleToFill"></image>
+        <image class="title-icon" src="{{couponIcon}}" mode="scaleToFill"></image>
         <text>优惠卡券</text>
       </view>
       <view class="arrow">
+        <text class="wait-pay">1</text>
         <image class="arrow-icon" src="{{arrowIcon}}" mode="scaleToFill"></image>
       </view>
     </view>

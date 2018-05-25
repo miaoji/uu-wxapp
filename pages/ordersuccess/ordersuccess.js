@@ -33,14 +33,19 @@ Page({
         phone: '18601714102',
         idcard: '320788373736663652',
       },
-    ]
+    ],
+    contactIcon: '../../static/imgs/ordersuccess/contact.png',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getOrderDetail();
+    var id = options.id;
+    this.getOrderDetail(id);
+    wx.setNavigationBarTitle({
+      title: '订单详情',
+    })
   },
 
   /**
@@ -92,7 +97,7 @@ Page({
   
   },
 
-  getOrderDetail() {
+  getOrderDetail(id) {
 
   }
 })
