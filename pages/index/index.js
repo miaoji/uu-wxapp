@@ -24,6 +24,11 @@ Page({
     shortLineIcon: '../../static/imgs/index/shortLine.png',
     recommendBest: {},
     recommendCommon: [],
+    coupon: {
+      amount: 1000,
+      expiry: '2018.09.01',
+      status: 1,
+    },
   },
   onLoad: function () {
     this.initData();
@@ -82,5 +87,9 @@ Page({
     wx.navigateTo({
       url: `/pages/search/search`
     })
+  },
+
+  getCoupon() {
+    console.log('ge');
   }
 })

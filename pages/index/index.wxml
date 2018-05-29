@@ -36,6 +36,34 @@
       <image class="search-icon" src="{{searchIcon}}" mode="scaleToFill"></image>
   	</view>
   </view>
+
+  <!-- coupon  优惠券-->
+
+  <view class="coupon" bind:tap="getCoupon">
+      <view class="item {{coupon.status == 1 ? 'active-bg' : 'f1f2f3 noactive-bg'}}">
+      <view class="left">
+        <view class="amount">
+          ￥{{ coupon.amount }}
+        </view>
+        <view class="intro {{coupon.status == 1 ? '' : 'white-word'}}">
+          <view>代金券</view>
+          <view>全场任意使用</view>
+        </view>
+      </view>
+      <block wx:if="{{coupon.status == 1}}">
+        <view class="right white-word first-right">
+          有效期至
+          {{ coupon.expiry }}
+        </view>
+      </block>
+      <block wx:else>
+        <view class="right white-word">
+          {{ coupon.status == 2 ? '已领取': ''}}
+        </view>
+      </block>
+    </view>
+  </view>
+
   <!-- category		 -->
   <view class="category">
   	<view class="cgitem longLine">
