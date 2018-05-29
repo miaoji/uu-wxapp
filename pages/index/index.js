@@ -27,8 +27,9 @@ Page({
     coupon: {
       amount: 1000,
       expiry: '2018.09.01',
-      status: 1,
+      status: 2,
     },
+    voucher: {},
   },
   onLoad: function () {
     this.initData();
@@ -74,6 +75,7 @@ Page({
         swiperItems,
         recommendCommon,
         recommendBest,
+        voucher,
       })
     })
   },
@@ -88,8 +90,36 @@ Page({
       url: `/pages/search/search`
     })
   },
-
   getCoupon() {
-    console.log('ge');
+    let { coupon } = this.data;
+    if(coupon.status == 2) {
+      wx.showToast({
+        title: '您已领取该优惠券',
+        icon: 'none', // "success", "loading", "none"
+        duration: 1500,
+        mask: false,
+        success: (res) => {
+        },
+        fail: (res) => {
+        },
+        complete: (res) => {
+        }
+      })
+      return;
+    }
+    q({
+      url: getVoucher,
+      method: 'post'
+    }).then(res => {
+      
+    })
+  },
+  handCategory(e) {
+    var type = e.currentTarget.dataset.type;
+    app.globalData.globalCategory = type;
+    wx.switchTab({
+      url: `/pages/category/category`
+    })
   }
+
 })

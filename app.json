@@ -12,7 +12,9 @@
     "pages/ordersuccess/ordersuccess",
     "pages/coupon/coupon",
     "pages/orderlist/orderlist",
-    "pages/notusedorder/notusedorder"
+    "pages/notusedorder/notusedorder",
+    "pages/paysuccess/paysuccess",
+    "pages/payfailed/payfailed"
   ],
   "window": {
     "navigationBarBackgroundColor": "#70AAF4",

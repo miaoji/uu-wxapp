@@ -1,4 +1,4 @@
-// components/cartitem/cartitem.js
+// components/categoryitem/category.js
 Component({
   /**
    * 组件的属性列表

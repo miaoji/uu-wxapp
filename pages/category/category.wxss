@@ -1,1 +1,72 @@
 /* pages/category/category.wxss */
+page {
+  /*background-color: #F1F2F3;*/
+}
+
+.filter {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	background-color: #FFF;
+	margin-bottom: 20rpx;
+	height: 80rpx;
+	border-bottom: 1rpx solid #eee;
+	z-index: 200;
+	width: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+}
+
+.f-item {
+	flex: 1;
+	height: 100%;
+	box-sizing: border-box;
+	color: #888;
+	font-size: 26rpx;
+	text-align: center;
+	line-height: 80rpx;
+}
+
+.f-type {
+	border-right: 1rpx solid #eee;
+}
+
+.selected-item {
+	color: #353535;
+}
+
+.cart-list {
+	margin-top: 80rpx;
+	padding: 20rpx 20rpx;
+	overflow-x: hidden;
+}
+
+.none {
+	font-size: 26rpx;
+	color: #888;
+	text-align: center;
+}
+
+
+.t-filter-wrap {
+	position: fixed;
+	top: 82rpx;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, .2);
+	z-index: 200;
+}
+
+.type-item {
+	font-size: 26rpx;
+	padding: 20rpx 40rpx;
+	background-color: #FFF;
+	border-bottom: 1rpx solid #eee;
+	color: #888;
+}
+
+.active-type {
+	color: #70AAF4;
+}

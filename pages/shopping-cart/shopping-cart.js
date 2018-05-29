@@ -1,4 +1,10 @@
 // pages/shopping-cart/shopping-cart.js
+
+const app = getApp()
+
+import { q } from '../../config/q'
+import { getShoppintCart } from '../../config/api'
+
 Page({
 
   /**
@@ -7,22 +13,7 @@ Page({
   data: {
     // filterItem: ['国内中长线', '国内短线', '爆款尾单'],
     // selectedItem: 0,
-    list: [
-      {
-        banner: '../../static/imgs/index/demo1.png',
-        name: '重庆/西安/北京/上海重庆/西安/北京/上海',
-        advance: '建议提前5天以上',
-        saled: '1888',
-        price: '5760',
-      },
-      {
-        banner: '../../static/imgs/index/demo3.png',
-        name: '启东/吕四/',
-        advance: '建议提前3天以上',
-        saled: '2000',
-        price: '2000',
-      }
-    ]
+    list: []
   },
 
   /**
@@ -32,6 +23,7 @@ Page({
     wx.setNavigationBarTitle({
       title: '购物车',
     })
+    this.initShoppingCart();
   },
 
   /**
@@ -88,6 +80,30 @@ Page({
     var index = e.currentTarget.dataset.idx;
     this.setData({
       selectedItem: index
+    })
+  },
+
+  initShoppingCart() {
+    q({
+      url: getShoppintCart
+    }).then(res => {
+      let result = res.data.data.tourline.rows;
+      if(result.length) {
+        let list = result.map(v => {
+          return {
+            id: v.id,
+            name: v.name,
+            saled: v.sale,
+            price: v.price,
+            advance: v.advanceDay,
+          }
+        })
+        this.setData({
+          list: list
+        })
+      }else {
+
+      }
     })
   }
 })

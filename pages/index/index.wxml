@@ -39,7 +39,7 @@
 
   <!-- coupon  优惠券-->
 
-  <view class="coupon" bind:tap="getCoupon">
+  <view class="coupon" bind:tap="getCoupon" wx:if="{{Object.keys(voucher).length}}">
       <view class="item {{coupon.status == 1 ? 'active-bg' : 'f1f2f3 noactive-bg'}}">
       <view class="left">
         <view class="amount">
@@ -66,15 +66,15 @@
 
   <!-- category		 -->
   <view class="category">
-  	<view class="cgitem longLine">
+  	<view class="cgitem longLine" data-type="long" bind:tap="handCategory">
   		<image class="line-icon" src="{{longLineIcon}}" mode="scaleToFill"></image>
   		<text>国内中长线</text>
   	</view>
-  	<view class="cgitem middleLine">
+  	<view class="cgitem middleLine" data-type="short" bind:tap="handCategory">
   		<image class="line-icon" src="{{middleLineIcon}}" mode="scaleToFill"></image>
   		<text>国内短线</text>
   	</view>
-  	<view class="cgitem shortLine">
+  	<view class="cgitem shortLine" data-type="rest" bind:tap="handCategory">
   		<image class="line-icon" src="{{shortLineIcon}}" mode="scaleToFill"></image>
   		<text>爆款尾单</text>
   	</view>
