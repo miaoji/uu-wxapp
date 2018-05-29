@@ -1,11 +1,20 @@
 // pages/search/search.js
+
+//获取应用实例
+const app = getApp()
+import { q } from '../../config/q'
+import { searchByKeyword } from '../../config/api'
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    searchIcon: '../../static/imgs/index/search.png',
+    keyword: '',
+    searchResult: [],
+    showList: false,
   },
 
   /**
@@ -64,5 +73,43 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+
+  bindKeyInput(e) {
+    this.setData({
+      keyword: e.detail.value
+    })
+  },
+
+  handleSearch() {
+    console.log(this.data.keyword);
+    q({
+      url: searchByKeyword(this.data.keyword),
+    }).then(res => {
+      let result = res.data.data;
+      console.log(res);
+      if(result.length) {
+        let searchResult = result.map(v => {
+          return {
+            id: v.id,
+            name: v.name,
+            banner: `${app.globalData.imageBase}${v.image.substring(1)}`,
+            intro: v.brief,
+            saled: v.sale,
+            price: v.price,
+          }
+        })
+        this.setData({
+          searchResult: searchResult
+        })
+      }else {
+        this.setData({
+          searchResult: []
+        })
+      }
+      this.setData({
+        showList: true
+      })
+    })
   }
 })

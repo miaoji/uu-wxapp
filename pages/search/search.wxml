@@ -1,2 +1,29 @@
 <!--pages/search/search.wxml-->
-<text>pages/search/search.wxml</text>
+<view class="wrap">
+	<view class="keyword-wrap">
+		<view class="keyword">
+			<input placeholder="搜索想去的目的地、景点" 
+						auto-focus class="k-input"  
+						placeholder-style="font-size: 26rpx;"
+						bindinput="bindKeyInput"/>
+			<view class="s-wrap" bind:tap="handleSearch">
+				<image class="search-icon" src="{{searchIcon}}" mode="scaleToFill"></image>
+			</view>
+		</view>
+	</view>
+	<view class="list" wx:if="{{showList}}">
+    <block wx:if="{{searchResult.length > 0}}" 
+    			wx:for="{{searchResult}}" 
+    			wx:key="{{item.id}}">
+    	<listitem item="{{item}}"></listitem>	
+    </block>
+    <block wx:if="{{searchResult.length == 0}}">
+    	<view class="none none-first">
+    		没有找到符合条件的结果
+    	</view>
+    	<view class="none">
+    		请修改条件重新查询
+    	</view>
+    </block>
+	</view>
+</view>

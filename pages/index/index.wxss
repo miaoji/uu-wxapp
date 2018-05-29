@@ -1,7 +1,6 @@
 /**index.wxss**/
 
 .company-wrapper {
-	margin-bottom: 10rpx;
 }
 
 .company-banner {
@@ -60,23 +59,13 @@
 	background-color: rgba(112, 170, 244, 0.3);
 	overflow: hidden;
 	border-radius: 0px;
-  border-bottom-right-radius: 12rpx;
-  border-top-right-radius: 12rpx;
+  border-radius: 12rpx;
   flex: 1;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-right: 20rpx;
-}
-
-.keyword-input input {
-	font-size: 24rpx;
-	flex: 1;
-	height: 100%;
-}
-
-.keyword-input-ph {
-	font-size: 24rpx;
+  font-size: 24rpx;
 	color: #888;
 }
 
@@ -154,6 +143,7 @@
 .rbb {
 	height: 300rpx;
 	position: relative;
+	overflow: hidden;
 }
 
 .rbb-p {

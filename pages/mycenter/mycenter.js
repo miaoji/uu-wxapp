@@ -10,6 +10,15 @@ Page({
     historyIcon: '../../static/imgs/center/icon2.png',
     couponIcon: '../../static/imgs/center/icon3.png',
     arrowIcon: '../../static/imgs/center/icon-arrow.png',
+    order: {
+      date: '2018-05-23 周六',
+      image: '../../static/imgs/orderlist/demo.png',
+      name: '上海浦东软件园20日游园20日园20日',
+      startDate: '05/20',
+      adult: 2,
+      child: 1,
+      orderNo: '',
+    }
   },
 
   /**
@@ -86,5 +95,13 @@ Page({
     wx.navigateTo({
       url: '/pages/notusedorder/notusedorder'
     })
+  },
+
+  viewDetail(e) {
+    var id = e.currentTarget.dataset.orderno;
+    wx.navigateTo({
+      url: `/pages/ordersuccess/ordersuccess?id=${id}`
+    })
   }
+
 })

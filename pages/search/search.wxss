@@ -1,1 +1,53 @@
 /* pages/search/search.wxss */
+page {
+	background-color: #F1F2F3;
+}
+.keyword-wrap {
+	padding: 20rpx;
+	background-color: #FFF;
+	overflow: hidden;
+}
+
+.keyword {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	background-color: #F1F2F3;
+	border-radius: 40rpx;
+	padding: 5rpx 20rpx 5rpx 40rpx;
+	height: 60rpx;
+	overflow: hidden;
+}
+
+.s-wrap {
+	width: 100rpx;
+	text-align: center;
+	flex: 1;
+	padding-top: 10rpx;
+}
+
+.search-icon {
+	width: 60rpx;
+	height: 60rpx;
+}
+
+.k-input {
+	flex: 5;
+	font-size: 26rpx;
+}
+
+.list {
+	background-color: #FFF;
+	margin-top: 20rpx;
+	padding: 20rpx 40rpx 40rpx 40rpx;
+}
+
+.none {
+	font-size: 24rpx;
+	color: #888;
+	text-align: center;
+}
+
+.none-first {
+	padding-top: 20rpx;
+}

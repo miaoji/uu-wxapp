@@ -30,7 +30,7 @@ Page({
     nopaylist: [
       {
         date: '05-23',
-        name: '上海浦东软件园20日游园20日园20日',
+        name: '上海浦东软件园20日游园20日园20日日园20日日园20日',
         startDate: '05/20',
         endDate: '05/28',
         orderNo: '',

@@ -78,7 +78,7 @@ page {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	margin-top: 30rpx;
+	margin-top: 25rpx;
 }
 
 .delete {
@@ -112,6 +112,7 @@ page {
 }
 
 .name {
+	width: 450rpx;
 	font-size: 30rpx;
 }
 

@@ -16,7 +16,7 @@ Page({
     indicatorColor: 'rgba(255, 255, 255, 0.3)',  // dot color
     indicatorActiveColor: '#FFF',   // dot active color
     swiperItems: [],
-    companyBanner: '../../static/imgs/index/company.jpg',
+    companyBanner: '../../static/imgs/index/company.png',
     // 搜索
     searchIcon: '../../static/imgs/index/search.png',
     longLineIcon: '../../static/imgs/index/longLine.png',
@@ -76,6 +76,11 @@ Page({
     var id = e.currentTarget.dataset.id;
     wx.navigateTo({
       url: `/pages/detail/detail?id=${id}`,
+    })
+  },
+  handleSearch() {
+    wx.navigateTo({
+      url: `/pages/search/search`
     })
   }
 })
