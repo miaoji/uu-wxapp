@@ -1,0 +1,52 @@
+<!--pages/makeorder/makeorder.wxml-->
+<view>
+	
+	<view class="detail">
+	</view>
+
+	<view class="contact">
+		<view class="title">联系人信息</view>	
+		<view class="c-item c-item-line">
+			<image class="c-icon" src="{{nameIcon}}" mode="scaleToFill"></image>
+			<input 
+				placeholder="请输入真实姓名" 
+				class="c-input" 
+				placeholder-style="font-size: 26rpx;color: #888;"
+				bindinput="handleCnameInput"></input>
+		</view>
+		<view class="c-item c-item-line">
+			<image class="c-icon" src="{{phoneIcon}}" mode="scaleToFill"></image>
+			<input placeholder="用于接收订单信息的正确手机号码" class="c-input" placeholder-style="font-size: 26rpx;color: #888;"></input>
+		</view>
+		<view class="c-item c-item-line">
+			<image class="c-icon" src="{{emailIcon}}" mode="scaleToFill"></image>
+			<input placeholder="请填写邮箱" class="c-input" placeholder-style="font-size: 26rpx;color: #888;"></input>
+		</view>
+		<view class="c-item">
+			<image class="c-icon" src="{{addressIcon}}" mode="scaleToFill"></image>
+			<input placeholder="请填写具体收货地址" class="c-input" placeholder-style="font-size: 26rpx;color: #888;"></input>
+		</view>
+	</view>
+
+	<view class="p-list">
+		<view class="title">出行人信息</view>
+		<view class="p-item" wx:for="{{persons}}">
+			
+		</view>
+	</view>
+
+	<view class="operation">
+		<view class="cc">
+			<view class="cc-contact">
+				<button class="cs_button" open-type="contact" session-from="weapp">
+				</button> 
+				<image class="cc-icon we-icon" src="{{wechatIcon}}" mode="scaleToFill"></image>
+			</view>
+		</view>
+		<view class="buy" bind:tap="handleOrder">
+			<button class="buy-btn">
+				提交订单
+			</button>
+		</view>
+	</view>
+</view>

@@ -1,0 +1,110 @@
+/* pages/makeorder/makeorder.wxss */
+page {
+	background-color: #F1F2F3;
+}
+
+.contact {
+	background-color: #FFF;
+}
+
+.title {
+	font-size: 32rpx;
+	font-weight: bold;
+	padding: 30rpx 0;
+	padding-left: 60rpx;
+}
+
+.c-item {
+	padding: 20rpx 0;
+	padding-left: 60rpx;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.c-input {
+	padding-left: 20rpx;
+	font-size: 26rpx;
+	width: 100%;
+}
+
+.c-icon {
+	width: 38rpx;
+	height: 38rpx;
+}
+
+.c-item-line {
+	border-bottom: 1rpx solid #eee;
+}
+
+.operation {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	margin-top: 40rpx;
+	display: flex;
+	flex-direction: row;
+	height: 100rpx;
+	background-color: #FFF;
+	border-top: 1rpx solid #eee;
+}
+
+.cc {
+	flex: 1;
+	display: flex;
+	flex-direction: row;
+}
+
+.cc-contact {
+	flex: 1;
+	position: relative;
+}
+
+.cc-cart {
+	flex: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.cc-icon {
+	width: 48rpx;
+	height: 48rpx;
+}
+
+.we-icon {
+	position: absolute;
+	top: 50%;
+	left: 25%;
+	transform: translate(-50%, -50%);
+	pointer-events: none;
+}
+
+.cs_button{
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+}
+
+.buy {
+	flex: 2;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.buy-btn {
+	width: 270rpx;
+	height: 100%;
+	color: #FFF;
+	font-size: 34rpx;
+	background-color: #fe4f4f;
+	border-radius: 0;
+	margin: 0;
+	line-height: 100rpx;
+}
+
+.jg {
+	height: 160rpx;
+	background-color: #F1F2F3;
+}

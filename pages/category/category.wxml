@@ -41,7 +41,8 @@
 	</view>
 	<view wx:else="">
 		<view wx:for="{{filterTypes}}" 
-					data-id="{{item.id}}" 
+					data-sort="{{item.sort}}" 
+					data-order="{{item.order}}" 
 					data-name="{{item.name}}"
 					class="type-item {{item.name == filterTypeName ? 'active-type' : ''}}" 
 					bind:tap="handleChooseFilterType">

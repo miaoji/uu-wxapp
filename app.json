@@ -14,7 +14,9 @@
     "pages/orderlist/orderlist",
     "pages/notusedorder/notusedorder",
     "pages/paysuccess/paysuccess",
-    "pages/payfailed/payfailed"
+    "pages/payfailed/payfailed",
+    "pages/makeorder/makeorder",
+    "pages/submitorder/submitorder"
   ],
   "window": {
     "navigationBarBackgroundColor": "#70AAF4",

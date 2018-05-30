@@ -60,7 +60,7 @@
 				<image class="cc-icon" src="{{cartIcon}}" mode="scaleToFill"></image>
 			</view>
 		</view>
-		<view class="buy">
+		<view class="buy" bind:tap="handleOrder">
 			<button class="buy-btn">
 				预定购买
 			</button>
@@ -68,6 +68,56 @@
 	</view>
 </view>
 
+<view class="c-wrap" 
+			bind:tap="hidecWrap"
+			style="height: {{clientHeight}}" 
+			wx:if="{{chooseLine}}">
+	<view class="c-content" catch:tap="catchBubble">
+		<view class="c-title">
+			选择行程
+		</view>
+		<view class="c-list">
+			<view 
+					class="c-item {{activeline == index ? 'c-active' : ''}}" 
+					wx:for="{{tourlineItem}}"
+					data-index="{{index}}"
+					data-id="{{item.id}}"
+					catch:tap="selectline">
+				{{ item.start_time }}  {{ item.adult_sale_price }}元/人  {{ item.child_sale_price }}元/儿童
+			</view>
+		</view>
+		<view class="c-title">
+			选择人数
+		</view>
+		<view class="c-count">
+			<view class="c-adult">
+				<view class="c-count-title">成人</view>  
+				<button catch:tap="dropAdult" class="c-button">-</button>
+				<input  
+					bindinput="bindAdultInput" 
+					placeholder="" 
+					class="c-input"
+					value="{{adultCount}}"/>
+				<button catch:tap="addAdult" class="c-button">+</button>
+			</view>
+			<view class="c-child">
+				<view class="c-count-title">
+					儿童
+				</view>
+				<button catch:tap="dropChild" class="c-button">-</button>
+				<input  
+					bindinput="bindChildInput" 
+					placeholder="" 
+					class="c-input"
+					value="{{childCount}}"/>
+				<button catch:tap="addChild" class="c-button">+</button>
+			</view>
+		</view>
+		<view class="c-submit" catch:tap="handleWrapSubmit">
+			确定
+		</view>
+	</view>
+</view>
 
 
 

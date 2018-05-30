@@ -1,20 +1,37 @@
-// pages/payfailed/payfailed.js
+// pages/makeorder/makeorder.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    wechatIcon: '../../static/imgs/detail/contact.png',
+    contact: {
+      name: '',
+      phone: '',
+      email: '',
+      address: '',
+    },
+    persons: [
+      {
+        name: '',
+        idcard: '',
+        phone: '',
+      }
+    ],
+    nameIcon: '../../static/imgs/makeorder/name.png',
+    phoneIcon: '../../static/imgs/makeorder/phone.png',
+    emailIcon: '../../static/imgs/makeorder/name.png',
+    addressIcon: '../../static/imgs/makeorder/location.png',
+    idcardIcon: '../../static/imgs/makeorder/idcard.png',
+    couponIcon: '../../static/imgs/makeorder/coupon.png',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.setNavigationBarTitle({
-      title: '支付失败',
-    })
+  
   },
 
   /**
@@ -65,9 +82,10 @@ Page({
   onShareAppMessage: function () {
   
   },
-  goOrderList() {
-    wx.navigateTo({
-      url: '/pages/notusedorder/notusedorder'
+
+  handleCnameInput(e) {
+    this.setData({
+      'contact.name': e.detail.value
     })
   }
 })

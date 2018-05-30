@@ -37,13 +37,30 @@ Page({
     filterType: 1,
     filterTypes: [
       {
-        id: 0,
+        sort: 0,
+        order: 0,
         name: '默认排序'
       },
       {
-        id: 1,
-        name: '价格'
-      }
+        sort: 1,
+        order: 2,
+        name: '价格从低到高'
+      },
+      {
+        sort: 1,
+        order: 1,
+        name: '价格从高到低'
+      },
+      {
+        sort: 2,
+        order: 1,
+        name: '销量从高到低'
+      },
+      {
+        sort: 2,
+        order: 2,
+        name: '销量从低到高'
+      },
     ],
     filterTypeName: '默认排序',
     animationData: '',
@@ -91,7 +108,14 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+    this.hideFilterCoop();
+    console.log('hide');
+    this.setData({
+      filterTypeName: '默认排序',
+      filterType: 1,
+      typename: '国内中长线',
+      range: 1,
+    })
   },
 
   /**
@@ -133,17 +157,18 @@ Page({
   },
   
   // 1: 国内长线, 2: 国内中线,3: 周边短线  range
-  getTourlines(reset) {
+  getTourlines(reset, order, sort) {
     let ps = this.data.pageSize || 20,
         range = this.data.range || 1,
         pn = this.data.pageNo || 0;
+    let url = '';
     if(reset) {
       this.setData({
         list: []
       })
     }
     q({
-      url: getTourlines(range, ps, pn)
+      url: getTourlines(range, ps, pn, order, sort)
     }).then(res => {
       let result = res.data.data.tourline.rows;
       if(result.length) {
@@ -233,14 +258,15 @@ Page({
   },
 
   handleChooseFilterType(e) {
-    var typeid = e.currentTarget.dataset.id,
+    var order = e.currentTarget.dataset.order,
+        sort = e.currentTarget.dataset.sort,
         typename = e.currentTarget.dataset.name;
     this.setData({
-      range: typeid,
       filterTypeName: typename,
       pageNo: 0,
     })
     this.resetPageState();
+    this.getTourlines(true, order, sort);
   },
 
   goTop: function (e) {  // 筛选的时候回到顶部

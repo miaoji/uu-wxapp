@@ -40,7 +40,7 @@ App({
   },
   globalData: {
     userInfo: null,
-    imageBase: 'http://www.uu-club.com',
+    imageBase: 'http://i.uu-club.com',
     globalCategory: 'long',  // 为了解决 switchTab 无法传参的问题
   },
 })
