@@ -17,6 +17,11 @@ Page({
         name: '',
         idcard: '',
         phone: '',
+      },
+      {
+        name: '',
+        idcard: '',
+        phone: '',
       }
     ],
     nameIcon: '../../static/imgs/makeorder/name.png',
@@ -25,13 +30,25 @@ Page({
     addressIcon: '../../static/imgs/makeorder/location.png',
     idcardIcon: '../../static/imgs/makeorder/idcard.png',
     couponIcon: '../../static/imgs/makeorder/coupon.png',
+    arrowIcon: '../../static/imgs/center/icon-arrow.png',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    wx.setNavigationBarTitle({
+      title: '提交订单',
+      success: (res) => {
+        
+      },
+      fail: (res) => {
+        
+      },
+      complete: (res) => {
+        
+      }
+    })
   },
 
   /**
@@ -86,6 +103,48 @@ Page({
   handleCnameInput(e) {
     this.setData({
       'contact.name': e.detail.value
+    })
+  },
+  handleCphoneInput(e) {
+    this.setData({
+      'contact.phone': e.detail.value
+    })
+  },
+  handleCemailInput(e) {
+    this.setData({
+      'contact.email': e.detail.value
+    })
+  },
+  handleCaddressInput(e) {
+    this.setData({
+      'contact.address': e.detail.value
+    })
+  },
+  handlePnameInput(e) {
+    var index = e.currentTarget.dataset.index;
+    var value = e.detail.value;
+    var persons = this.data.persons;
+    persons[index].name = value;
+    this.setData({
+      persons: persons
+    })
+  },
+  handlePidcardInput(e) {
+    var index = e.currentTarget.dataset.index;
+    var value = e.detail.value;
+    var persons = this.data.persons;
+    persons[index].idcard = value;
+    this.setData({
+      persons: persons
+    })
+  },
+  handlePphoneInput(e) {
+    var index = e.currentTarget.dataset.index;
+    var value = e.detail.value;
+    var persons = this.data.persons;
+    persons[index].phone = value;
+    this.setData({
+      persons: persons
     })
   }
 })

@@ -30,7 +30,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 11,
+			"current": 13,
 			"list": [
 				{
 					"id": 0,
@@ -102,6 +102,18 @@
 					"id": -1,
 					"name": "makeorder",
 					"pathName": "pages/makeorder/makeorder",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "ordersuccess",
+					"pathName": "pages/ordersuccess/ordersuccess",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "submitorder",
+					"pathName": "pages/submitorder/submitorder",
 					"query": ""
 				}
 			]

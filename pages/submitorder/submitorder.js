@@ -1,18 +1,53 @@
 // pages/submitorder/submitorder.js
+
+const app = getApp()
+
+import { q } from '../../config/q'
+import { payOrder } from '../../config/api'
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    contacter: {
+      name: '张浩',
+      phone: '18601714102',
+      email: 'arronf2e@163.com',
+      address: '上海杨浦区创智天地',
+    },
+    travellers: [
+      {
+        name: '张浩1',
+        phone: '18601714102',
+        idcard: '320788373736663652',
+      },
+      {
+        name: '张浩2',
+        phone: '18601714102',
+        idcard: '320788373736663652',
+      },
+    ],
+    wechatIcon: '../../static/imgs/detail/contact.png',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    wx.setNavigationBarTitle({
+      title: '确认订单',
+      success: (res) => {
+        
+      },
+      fail: (res) => {
+        
+      },
+      complete: (res) => {
+        
+      }
+    })
   },
 
   /**
@@ -62,5 +97,18 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+
+  handleOrder() {
+    q({
+      url: payOrder,
+      method: 'post',
+      data: {
+        orderId: '',
+        voucherId: '',
+      }
+    }).then(res => {
+      console.log(res, 'res');
+    })
   }
 })

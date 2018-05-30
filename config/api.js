@@ -21,6 +21,8 @@ const getTourlines = (range, pageSize, pageNo, order, sort) => {
 }
 const getVoucher = `${baseUrl}/voucher/3`;   // 领取优惠券
 
+const payOrder = `${baseUrl}/order/tourline/pay`;
+
 module.exports = {
   getHomeInfo: getHomeInfo,
   getTourlineDetail: getTourlineDetail,
@@ -29,4 +31,5 @@ module.exports = {
   getShoppintCart: getShoppintCart,
   getTourlines: getTourlines,
   getVoucher: getVoucher,
+  payOrder: payOrder,
 }

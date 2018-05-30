@@ -1,7 +1,65 @@
 <!--pages/makeorder/makeorder.wxml-->
-<view>
+<scroll-view class="wrap">
 	
 	<view class="detail">
+		<view class="d-content">
+			<div class="d-line">
+				<view class="intro">
+					产品名称：
+				</view>
+				<view class="content">
+					<view class="name tourname red-word">
+						阳春三月木s阳春三月木s阳春三月木s阳春三月木s阳春三月木s阳春三月木s阳春三月木s阳春三月木s阳春三月木s阳春三月木s
+					</view>
+				</view>
+			</div>
+			<div class="d-line">
+				<view class="intro">
+					出发城市：
+				</view>
+				<view class="content">
+					<view class="name red-word">
+						上海
+					</view>
+				</view>
+			</div>
+			<div class="d-line">
+				<view class="intro">
+					出发日期：
+				</view>
+				<view class="content">
+					<view class="name">
+					  <view class="red-word">
+					  	2018-05-20（周六）
+					  </view>       
+					  <view>
+					  	 出发天数：   3
+					  </view>
+					</view>
+				</view>
+			</div>
+			<div class="d-line">
+				<view class="intro">
+					出行人数：
+				</view>
+				<view class="content">
+					<view class="name">
+						<view class="red-word">
+							2
+						</view>
+						<view>
+							成人
+						</view>        
+						<view class="red-word child-count">
+							1
+						</view>
+						<view>
+							儿童
+						</view>
+					</view>
+				</view>
+			</div>
+		</view>
 	</view>
 
 	<view class="contact">
@@ -16,22 +74,58 @@
 		</view>
 		<view class="c-item c-item-line">
 			<image class="c-icon" src="{{phoneIcon}}" mode="scaleToFill"></image>
-			<input placeholder="用于接收订单信息的正确手机号码" class="c-input" placeholder-style="font-size: 26rpx;color: #888;"></input>
+			<input 
+				placeholder="用于接收订单信息的正确手机号码" 
+				class="c-input" 
+				placeholder-style="font-size: 26rpx;color: #888;"
+				bindinput="handleCphoneInput"></input>
 		</view>
 		<view class="c-item c-item-line">
 			<image class="c-icon" src="{{emailIcon}}" mode="scaleToFill"></image>
-			<input placeholder="请填写邮箱" class="c-input" placeholder-style="font-size: 26rpx;color: #888;"></input>
+			<input placeholder="请填写邮箱" class="c-input" placeholder-style="font-size: 26rpx;color: #888;"
+			bindinput="handleCemailInput"></input>
 		</view>
 		<view class="c-item">
 			<image class="c-icon" src="{{addressIcon}}" mode="scaleToFill"></image>
-			<input placeholder="请填写具体收货地址" class="c-input" placeholder-style="font-size: 26rpx;color: #888;"></input>
+			<input placeholder="请填写具体收货地址" class="c-input" placeholder-style="font-size: 26rpx;color: #888;"
+			bindinput="handleCaddressInput"></input>
 		</view>
 	</view>
 
 	<view class="p-list">
 		<view class="title">出行人信息</view>
 		<view class="p-item" wx:for="{{persons}}">
-			
+			<view class="c-item">
+				<image class="c-icon" src="{{nameIcon}}" mode="scaleToFill"></image>
+				<input placeholder="出行人{{index+1}}的真实姓名" class="c-input" placeholder-style="font-size: 26rpx;color: #888;"
+				data-index="{{index}}"
+				bindinput="handlePnameInput"></input>
+			</view>
+			<view class="c-item">
+				<image class="c-icon" src="{{idcardIcon}}" mode="scaleToFill"></image>
+				<input placeholder="请输入证件号码" class="c-input" placeholder-style="font-size: 26rpx;color: #888;"
+				data-index="{{index}}"
+				bindinput="handlePidcardInput"></input>
+			</view>
+			<view class="c-item">
+				<image class="c-icon" src="{{phoneIcon}}" mode="scaleToFill"></image>
+				<input placeholder="请填写手机号码" class="c-input" placeholder-style="font-size: 26rpx;color: #888;"
+				data-index="{{index}}"
+				bindinput="handlePphoneInput"></input>
+			</view>
+		</view>
+	</view>
+
+	<view class="coupon">
+		<view class="left">
+			<image class="c-icon" src="{{couponIcon}}" mode="scaleToFill"></image>
+			<view class="coupon-name">优惠卡券</view>
+		</view>
+		<view class="right">
+			<view class="drop-count">
+				-20
+			</view>
+			<image class="c-icon" src="{{arrowIcon}}" mode="scaleToFill"></image>
 		</view>
 	</view>
 
@@ -43,10 +137,13 @@
 				<image class="cc-icon we-icon" src="{{wechatIcon}}" mode="scaleToFill"></image>
 			</view>
 		</view>
-		<view class="buy" bind:tap="handleOrder">
-			<button class="buy-btn">
+		<view class="buy">
+			<view class="total">
+				总额：￥1870
+			</view>
+			<button class="buy-btn" bind:tap="handleOrder">
 				提交订单
 			</button>
 		</view>
 	</view>
-</view>
+</scroll-view>

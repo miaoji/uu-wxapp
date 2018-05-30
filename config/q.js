@@ -10,12 +10,26 @@ const q = (option = {}) => {
       data: option.data || {},
       header: option.header || {},
       success: function(data) {
-        resolve(data)
         wx.hideLoading()
+        if(data.data.code == -1) {
+          wx.showToast({
+            title: data.data.msg,
+            icon: 'none',
+            duration: 1500,
+          })
+        }else {
+          resolve(data)
+        }
       },
       fail: function(err) {
-        reject(err)
+        // reject(err)
         wx.hideLoading();
+        wx.showToast({
+          title: err,
+          icon: 'none',
+          duration: 1500,
+          mask: false,
+        })
       }
     })
   })
