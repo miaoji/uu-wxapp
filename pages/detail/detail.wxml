@@ -1,10 +1,10 @@
-<import src="../../static/libs/wxParse/wxParse.wxml"/>
+<import src="../../components/wxParser/index.wxml"/>
 
 <view class="d-wrap">
 	<view class="intro">
 		<view class="banner">
 			<image class="banner-img" src="{{base.image}}" mode="scaleToFill"></image>
-			<text class="banner-number">线路编号：3333</text>
+			<!-- <text class="banner-number">线路编号：3333</text> -->
 		</view>
 
 		<view class="title">
@@ -39,11 +39,11 @@
 	</view>
 
 	<view class="html-c">
-		<template is="wxParse" data="{{wxParseData:xc.nodes}}"/> 
+		<template is="wxParser" data="{{wxParserData:xc.nodes}}"/>
 	</view>
 
 	<view class="html-c">
-		<template is="wxParse" data="{{wxParseData:yd.nodes}}"/> 
+		<template is="wxParser" data="{{wxParserData:yd.nodes}}"/>
 	</view>
 
 	<view class="jg"></view>
@@ -56,7 +56,7 @@
 				</button> 
 				<image class="cc-icon we-icon" src="{{wechatIcon}}" mode="scaleToFill"></image>
 			</view>
-			<view class="cc-cart">
+			<view class="cc-cart" bind:tap="addToCart">
 				<image class="cc-icon" src="{{cartIcon}}" mode="scaleToFill"></image>
 			</view>
 		</view>

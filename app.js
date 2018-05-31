@@ -1,15 +1,37 @@
 //app.js
 
+import { wechatLogin } from './config/api.js'
+import { q } from './config/q'
+
 App({
   onLaunch: function () {
     this.checkUpdate();
+    // 登录
     wx.login({
       success: res => {
-        if(res.code) {
-          console.log(res.code);  // code在这里
-        }
+        // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        this.wechatLogin(res.code)
       }
     })
+    // 获取用户信息
+    // wx.getSetting({
+    //   success: res => {
+    //     if (res.authSetting['scope.userInfo']) {
+    //       // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
+    //       wx.getUserInfo({
+    //         success: res => {
+    //           // 可以将 res 发送给后台解码出 unionId
+    //           this.globalData.userInfo = res.userInfo
+    //           // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+    //           // 所以此处加入 callback 以防止这种情况
+    //           if (this.userInfoReadyCallback) {
+    //             this.userInfoReadyCallback(res)
+    //           }
+    //         }
+    //       })
+    //     }
+    //   }
+    // })
   },
   checkUpdate() {
 
@@ -38,6 +60,19 @@ App({
       // 新的版本下载失败
     })
   },
+
+  wechatLogin(code) {
+    console.log(' wechatLogin', code);
+    q({
+      url: wechatLogin,
+      method: 'post',
+      data: {
+        code: code
+      }
+    }).then(res => {
+    })
+  },
+
   globalData: {
     userInfo: null,
     imageBase: 'http://i.uu-club.com',

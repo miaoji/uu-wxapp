@@ -22,4 +22,12 @@ page {
 }
 
 .cart-list {
+	padding-bottom: 40rpx;
+}
+
+.empty {
+	font-size: 28rpx;
+	color: #888;
+	padding-top: 80rpx;
+	text-align: center;
 }

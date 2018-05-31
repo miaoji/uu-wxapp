@@ -1,6 +1,5 @@
 /**app.wxss**/
-
-@import "./static/libs/wxParse/wxParse.wxss";
+@import './components/wxParser/wxParse.wxss'
 
 .container {
   height: 100%;

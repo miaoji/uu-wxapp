@@ -132,7 +132,7 @@
 }
 
 .recommend-list {
-	padding: 0 40rpx 40rpx 40rpx;
+	padding: 0 30rpx 60rpx 30rpx;
 }
 
 .recommend-best {

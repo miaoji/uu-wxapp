@@ -1,4 +1,10 @@
 // pages/mycenter/mycenter.js
+
+const app = getApp()
+
+import { q } from '../../config/q'
+import { orderList } from '../../config/api'
+
 Page({
 
   /**
@@ -28,6 +34,8 @@ Page({
     wx.setNavigationBarTitle({
       title: '个人中心',
     })
+    // 这边需要判断是否登录
+    this.getorderList();
   },
 
   /**
@@ -101,6 +109,14 @@ Page({
     var id = e.currentTarget.dataset.orderno;
     wx.navigateTo({
       url: `/pages/ordersuccess/ordersuccess?id=${id}`
+    })
+  },
+
+  getorderList() {
+    q({
+      url: orderList
+    }).then(res => {
+      console.log('res');
     })
   }
 

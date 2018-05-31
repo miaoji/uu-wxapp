@@ -35,10 +35,12 @@ Page({
     this.initData();
   },
   initData() {
+    console.log('entry init........');
     q({
       url: getHomeInfo,
     }).then(res => {
       // 轮播图， 优惠券， 推荐线路
+      console.log('entry init........2222', res);
       let {carousel, voucher,  tourline } = res.data.data;
       let swiperItems = carousel && carousel.map(v => {
         return {

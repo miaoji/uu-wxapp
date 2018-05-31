@@ -96,13 +96,16 @@ Page({
             saled: v.sale,
             price: v.price,
             advance: v.advanceDay,
+            // banner: `${app.globalData.imageBase}${v.image.substring(1)}`,
           }
         })
         this.setData({
           list: list
         })
       }else {
-
+        this.setData({
+          list: []
+        })
       }
     })
   }

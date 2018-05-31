@@ -3,10 +3,10 @@
 //获取应用实例
 const app = getApp()
 
-var WxParse = require('../../static/libs/wxParse/wxParse.js')
+const wxParser = require('../../components/wxParser/index');
 
 import { q } from '../../config/q'
-import { getTourlineDetail, getTourlineDetailItem } from '../../config/api'
+import { getTourlineDetail, getTourlineDetailItem, addToCart } from '../../config/api'
 
 Page({
 
@@ -94,6 +94,7 @@ Page({
     q({
       url: getTourlineDetail(id),
     }).then(res => {
+      console.log(res, 'success');
       let detail = res.data && res.data.data;
       // let { }
       let { id, name, image, brief, sale, price,
@@ -118,14 +119,21 @@ Page({
       // 行程安排
       tourDesc = tourDesc.replace(/\.\/public\//g, `${app.globalData.imageBase}/public/`);
       appointDesc = appointDesc.replace(/\.\/public\//g, `${app.globalData.imageBase}/public/`);
-      // tourDesc = tourDesc.replace('./public/', `${app.globalData.imageBase}/public/`);
-      // appointDesc = appointDesc.replace('./public/', `${app.globalData.imageBase}/public/`);
-      console.log(appointDesc);
-      WxParse.wxParse('xc', 'html', tourDesc, this, 5);
-      WxParse.wxParse('yd', 'html', appointDesc, this, 5);
       this.setData({
         requestEnd: true,
       })
+      wxParser.parse({
+        bind: 'xc',
+        html: tourDesc,
+        target: this,
+        enablePreviewImage: false, // 禁用图片预览功能
+      });
+      wxParser.parse({
+        bind: 'yd',
+        html: appointDesc,
+        target: this,
+        enablePreviewImage: false, // 禁用图片预览功能
+      });
     })
   },
   getTourlineDetailItem() {
@@ -250,5 +258,27 @@ Page({
   },
   catchBubble() {
     return false;
+  },
+  addToCart() {
+    q({
+      url: addToCart(this.data.id),
+      method: 'post'
+    }).then(res => {
+      wx.showToast({
+        title: '加入购物车成功',
+        icon: 'none', // "success", "loading", "none"
+        duration: 1000,
+        mask: false,
+        success: (res) => {
+          
+        },
+        fail: (res) => {
+          
+        },
+        complete: (res) => {
+          
+        }
+      })
+    })
   }
 })
