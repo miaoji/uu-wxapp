@@ -23,7 +23,6 @@ Page({
     wx.setNavigationBarTitle({
       title: '购物车',
     })
-    this.initShoppingCart();
   },
 
   /**
@@ -37,7 +36,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    this.initShoppingCart();
   },
 
   /**
@@ -94,9 +93,9 @@ Page({
             id: v.id,
             name: v.name,
             saled: v.sale,
-            price: v.price,
+            price: v.price / 100,
             advance: v.advanceDay,
-            // banner: `${app.globalData.imageBase}${v.image.substring(1)}`,
+            banner: `${app.globalData.imageBase}${v.image.substring(1)}`,
           }
         })
         this.setData({

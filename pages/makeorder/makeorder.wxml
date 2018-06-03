@@ -9,7 +9,7 @@
 				</view>
 				<view class="content">
 					<view class="name tourname red-word">
-						阳春三月木s阳春三月木s阳春三月木s阳春三月木s阳春三月木s阳春三月木s阳春三月木s阳春三月木s阳春三月木s阳春三月木s
+						{{ tourline_name }}
 					</view>
 				</view>
 			</div>
@@ -33,7 +33,7 @@
 					  	2018-05-20（周六）
 					  </view>       
 					  <view>
-					  	 出发天数：   3
+					  	 出发天数：   {{ tour_total_day }}
 					  </view>
 					</view>
 				</view>
@@ -45,13 +45,13 @@
 				<view class="content">
 					<view class="name">
 						<view class="red-word">
-							2
+							{{ adult_count }}
 						</view>
 						<view>
 							成人
 						</view>        
 						<view class="red-word child-count">
-							1
+							{{ child_count }}
 						</view>
 						<view>
 							儿童
@@ -102,7 +102,12 @@
 				bindinput="handlePnameInput"></input>
 			</view>
 			<view class="c-item">
-				<image class="c-icon" src="{{idcardIcon}}" mode="scaleToFill"></image>
+				<!-- <image class="c-icon" src="{{idcardIcon}}" mode="scaleToFill"></image> -->
+				<picker bindchange="bindPickerChange" data-index="{{index}}" value="{{item.index2}}" range="{{idTypeArray}}">
+			    <view class="picker">
+			      {{idTypeArray[item.index2]}}
+			    </view>
+			  </picker>
 				<input placeholder="请输入证件号码" class="c-input" placeholder-style="font-size: 26rpx;color: #888;"
 				data-index="{{index}}"
 				bindinput="handlePidcardInput"></input>
@@ -116,14 +121,14 @@
 		</view>
 	</view>
 
-	<view class="coupon">
+	<view class="coupon" bind:tap="chooseCoupon">
 		<view class="left">
 			<image class="c-icon" src="{{couponIcon}}" mode="scaleToFill"></image>
 			<view class="coupon-name">优惠卡券</view>
 		</view>
 		<view class="right">
 			<view class="drop-count">
-				-20
+				{{ couponName }}
 			</view>
 			<image class="c-icon" src="{{arrowIcon}}" mode="scaleToFill"></image>
 		</view>
@@ -139,7 +144,7 @@
 		</view>
 		<view class="buy">
 			<view class="total">
-				总额：￥1870
+				总额：￥{{ price }}
 			</view>
 			<button class="buy-btn" bind:tap="handleOrder">
 				提交订单

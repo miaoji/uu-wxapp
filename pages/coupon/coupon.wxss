@@ -60,3 +60,11 @@ page {
 .f1f2f3 {
 	color: #f1f2f3;
 }
+
+
+.empty {
+	font-size: 26rpx;
+	color: #888;
+	padding-top: 80rpx;
+	text-align: center;
+}

@@ -39,26 +39,25 @@
 
   <!-- coupon  优惠券-->
 
-  <view class="coupon" bind:tap="getCoupon" wx:if="{{Object.keys(voucher).length}}">
-      <view class="item {{coupon.status == 1 ? 'active-bg' : 'f1f2f3 noactive-bg'}}">
+  <view class="coupon" bind:tap="getCoupon" data-id="{{voucher.id}}">
+      <view class="item {{voucher.status == 1 ? 'active-bg' : 'white-word noactive-bg'}}">
       <view class="left">
         <view class="amount">
-          ￥{{ coupon.amount }}
+          ￥{{ voucher.money / 100 }}
         </view>
-        <view class="intro {{coupon.status == 1 ? '' : 'white-word'}}">
+        <view class="intro">
           <view>代金券</view>
           <view>全场任意使用</view>
         </view>
       </view>
-      <block wx:if="{{coupon.status == 1}}">
-        <view class="right white-word first-right">
-          有效期至
-          {{ coupon.expiry }}
+      <block wx:if="{{voucher.status == 1}}">
+        <view class="right first-right">
+          立即领取
         </view>
       </block>
       <block wx:else>
         <view class="right white-word">
-          {{ coupon.status == 2 ? '已领取': ''}}
+          已领取
         </view>
       </block>
     </view>
@@ -90,7 +89,7 @@
   		<view class="recommend-best" data-id="{{recommendBest.id}}" bind:tap="goDetail"> 
   			<view class="rbb">
   				<view class="rbb-p">
-  					<image class="rbb-banner" src="{{recommendBest.banner}}" mode="scaleToFill"></image>
+  					<image class="rbb-banner" lazy-load="true" src="{{recommendBest.banner}}" mode="scaleToFill"></image>
   				</view>
   				<view class="rbb-n">
   					{{recommendBest.name}}

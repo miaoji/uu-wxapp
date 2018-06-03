@@ -7,7 +7,7 @@
 				</view>
 				<view class="content">
 					<view class="name tourname red-word">
-						阳春三月木s阳春三月木s阳春三月木s阳春三月木s阳春三月木s阳春三月木s阳春三月木s阳春三月木s阳春三月木s阳春三月木s
+						{{ tourline_name }}
 					</view>
 				</view>
 			</div>
@@ -31,7 +31,7 @@
 					  	2018-05-20（周六）
 					  </view>       
 					  <view>
-					  	 出发天数：   3
+					  	 出发天数：   {{ tour_total_day }}
 					  </view>
 					</view>
 				</view>
@@ -43,13 +43,13 @@
 				<view class="content">
 					<view class="name">
 						<view class="red-word">
-							2
+							{{ adult_count }}
 						</view>
 						<view>
 							成人
 						</view>        
 						<view class="red-word child-count">
-							1
+							{{ child_count }}
 						</view>
 						<view>
 							儿童

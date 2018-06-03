@@ -281,12 +281,12 @@ page {
 .c-submit {
 	width: 95%;
 	margin: 0 auto;
-	height: 70rpx;
+	height: 80rpx;
 	background-color: #fe4f4f;
 	font-size: 28rpx;
 	color: #fff;
 	text-align: center;
-	line-height: 70rpx;
+	line-height: 80rpx;
 	border-radius: 40rpx;
 	margin-bottom: 40rpx;
 }

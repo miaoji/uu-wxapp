@@ -6,7 +6,7 @@ const app = getApp()
 const wxParser = require('../../components/wxParser/index');
 
 import { q } from '../../config/q'
-import { getTourlineDetail, getTourlineDetailItem, addToCart } from '../../config/api'
+import { getTourlineDetail, getTourlineDetailItem, addToCart, makeOrder } from '../../config/api'
 
 Page({
 
@@ -24,6 +24,8 @@ Page({
     id: '',
     activeline: 0,
     selectlineId: '',
+    adult_sale_price: 0,
+    child_sale_price: 0,
     adultCount: 1,
     childCount: 1,
   },
@@ -99,7 +101,7 @@ Page({
       // let { }
       let { id, name, image, brief, sale, price,
             city_id, tourTotalDay,city_name,
-            tourDesc, appointDesc } = detail.tourline;
+            tourDesc, appointDesc, priceExplain } = detail.tourline;
       wx.setNavigationBarTitle({
         title: name,
       })
@@ -110,10 +112,11 @@ Page({
           image: `${app.globalData.imageBase}${image.substring(1)}`,
           brief,   // 推荐理由
           sale,
-          price,
+          price: price / 100,
           city_id,
           tourTotalDay,
           city_name,
+          priceExplain,
         },
       })
       // 行程安排
@@ -169,7 +172,6 @@ Page({
     q({
       url: getTourlineDetailItem(this.data.id)
     }).then(res => {
-      console.log(res, 'res,hhahah');
       let result = res.data.data.tourlineItem;
       if(result.length) {
         let tourlineItem = [];
@@ -192,6 +194,8 @@ Page({
         this.setData({
           tourlineItem: tourlineItem,
           selectlineId: tourlineItem[0].id,
+          adult_sale_price: tourlineItem[0].adult_sale_price,
+          child_sale_price: tourlineItem[0].child_sale_price,
         })
       }
       this.setData({
@@ -201,11 +205,12 @@ Page({
     
   },
   selectline(e) {
-    var index = e.currentTarget.dataset.index;
-    var id = e.currentTarget.dataset.id;
+    var { id, index, adult_sale_price, child_sale_price} = e.currentTarget.dataset;
     this.setData({
       activeline: index,
       selectlineId: id,
+      adult_sale_price: adult_sale_price,
+      child_sale_price: child_sale_price,
     })
   },
   hidecWrap() {
@@ -254,7 +259,25 @@ Page({
     })
   },
   handleWrapSubmit() {
-
+    q({
+      url: makeOrder,
+      method: 'post',
+      header: {
+        authorization: app.globalData.token,
+      },
+      data: {
+        itemId: this.data.selectlineId,
+        adultCount: this.data.adultCount,
+        childCount: this.data.childCount,
+      }
+    }).then(res => {
+      let {orderId} = res.data.data;
+      var price = this.data.adultCount * this.data.adult_sale_price / 100 + this.data.childCount  * this.data.child_sale_price / 100; 
+      this.hidecWrap();
+      wx.navigateTo({
+        url: `/pages/makeorder/makeorder?orderId=${orderId}&price=${price}`,
+      })
+    })
   },
   catchBubble() {
     return false;
@@ -262,7 +285,10 @@ Page({
   addToCart() {
     q({
       url: addToCart(this.data.id),
-      method: 'post'
+      method: 'post',
+      header: {
+        authorization: app.globalData.token,
+      }
     }).then(res => {
       wx.showToast({
         title: '加入购物车成功',

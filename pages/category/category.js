@@ -102,6 +102,7 @@ Page({
       typename: typename,
     })
     this.getTourlines();
+    this.goTop();
   },
 
   /**
@@ -178,7 +179,7 @@ Page({
             intro: v.brief,
             name: v.name,
             saled: v.sale,
-            price: v.price,
+            price: v.price / 100,
             banner: `${app.globalData.imageBase}${v.image.substring(1)}`,
           }
         })

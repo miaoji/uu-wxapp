@@ -10,11 +10,11 @@
   			<text>未出行订单</text>
   		</view>
   		<view class="arrow">
-        <text class="wait-pay">待付款</text>
+        <text class="wait-pay" wx:if="{{haveWaitPay}}">待付款</text>
   			<image class="arrow-icon" src="{{arrowIcon}}" mode="scaleToFill"></image>
   		</view>
   	</view>
-    <view class="order">
+    <view class="order" wx:if="{{haveFinish}}">
       <view class="cards">
         <view class="date">
           {{ order.date }}
@@ -66,7 +66,7 @@
         <text>优惠卡券</text>
       </view>
       <view class="arrow">
-        <text class="wait-pay">1</text>
+        <text class="wait-pay" wx:if="{{voucherCount}}">{{voucherCount}}</text>
         <image class="arrow-icon" src="{{arrowIcon}}" mode="scaleToFill"></image>
       </view>
     </view>

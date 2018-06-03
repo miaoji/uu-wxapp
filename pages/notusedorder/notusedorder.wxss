@@ -35,7 +35,7 @@ page {
 }
 
 .img {
-	width: 420rpx;
+	width: 290rpx;
 	height: 100%;
 	overflow: hidden;
 }
@@ -47,7 +47,7 @@ page {
 
 .detail {
 	box-sizing: border-box;
-	padding: 30rpx 40rpx 0 40rpx;
+	padding: 30rpx 0rpx 0 40rpx;
 }
 
 .name {
@@ -60,7 +60,7 @@ page {
 
 .sdate {
 	margin-top: 10rpx;
-	font-size: 30rpx;
+	font-size: 26rpx;
 	color: #888;
 }
 
@@ -78,15 +78,16 @@ page {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	margin-top: 25rpx;
+	margin-top: 40rpx;
+	/*border-top: 1rpx solid #eee;*/
 }
 
 .delete {
-	font-size: 28rpx;
+	font-size: 26rpx;
 }
 
 .view-detail {
-	font-size: 28rpx;
+	font-size: 26rpx;
 	color: #70AAF4;
 }
 
@@ -114,6 +115,14 @@ page {
 .name {
 	width: 450rpx;
 	font-size: 30rpx;
+}
+
+.name2 {
+	width: 280rpx;
+	font-size: 30rpx;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
 }
 
 .datescope {
@@ -156,4 +165,11 @@ page {
 
 .price-word {
 	color: #FF0000;
+}
+
+.empty {
+	font-size: 26rpx;
+	color: #888;
+	padding-top: 80rpx;
+	text-align: center;
 }

@@ -1,5 +1,5 @@
 // put api list here
-const baseUrl = 'http://test.wwlin.cn/api'
+const baseUrl = 'https://wwlin.cn/api'
 
 // 所有接口列表如下：
 const getHomeInfo = `${baseUrl}/home`;
@@ -19,6 +19,8 @@ const getTourlines = (range, pageSize, pageNo, order, sort) => {
 	return `${baseUrl}/tourline?range=${range}&pageSize=${pageSize}&pageNo=${pageNo}`;
 }
 const getVoucher = `${baseUrl}/voucher/3`;   // 领取优惠券
+
+const getVoucherList = `${baseUrl}/voucher`;  // 优惠券列表
 
 const addToCart = id => `${baseUrl}/tourline/cart/${id}`;
 
@@ -53,6 +55,7 @@ module.exports = {
   getShoppintCart: getShoppintCart,
   getTourlines: getTourlines,
   getVoucher: getVoucher,
+  getVoucherList: getVoucherList,
   payOrder: payOrder,
   addToCart: addToCart,
   deleteOrder: deleteOrder,

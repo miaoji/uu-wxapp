@@ -1,5 +1,5 @@
 <!--pages/orderlist/orderlist.wxml-->
-<view class="list">
+<view class="list" wx:if="{{list.length > 0}}">
 	<view class="item" wx:for="{{list}}">
 		<view class="date">
 			预订日期：{{ item.date }}
@@ -13,10 +13,10 @@
 					{{ item.name }}
 				</view>
 				<view class="sdate">
-					{{ item.startDate }} 至 {{ item.endDate }}
+					出发：{{ item.startDate }}  行程：{{ item.tour_total_day }} 天
 				</view>
 				<view class="price">
-					<text class="price-text">￥{{ item.price }}</text> 已成交
+					<text class="price-text">￥{{ item.price }}</text> 　　已成交
 				</view>
 				<view class="options">
 					<view class="delete" data-orderno="{{ item.orderNo }}" bind:tap="deleteOrder">
@@ -29,4 +29,8 @@
 			</view>
 		</view>
 	</view>
+</view>
+
+<view class="empty" wx:else>
+	暂无订单
 </view>

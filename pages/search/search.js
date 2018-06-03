@@ -96,7 +96,7 @@ Page({
             banner: `${app.globalData.imageBase}${v.image.substring(1)}`,
             intro: v.brief,
             saled: v.sale,
-            price: v.price,
+            price: v.price / 100,
           }
         })
         this.setData({

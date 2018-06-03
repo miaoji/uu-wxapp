@@ -4,7 +4,7 @@ page {
 }
 
 .list {
-	padding: 0 40rpx 40rpx 40rpx;
+	padding: 0 30rpx 40rpx 40rpx;
 }
 
 .item {
@@ -35,9 +35,9 @@ page {
 }
 
 .img {
-	width: 420rpx;
+	width: 40%;
 	height: 100%;
-	overflow: hidden;
+	/*overflow: hidden;*/
 }
 
 .timage {
@@ -46,12 +46,13 @@ page {
 }
 
 .detail {
+	width: 60%;
 	box-sizing: border-box;
-	padding: 30rpx 40rpx 0 40rpx;
+	padding: 20rpx 40rpx 0 30rpx;
 }
 
 .name {
-	width: 100%;
+	width: 200rpx;
 	font-size: 32rpx;
 	overflow: hidden;
 	text-overflow:ellipsis;
@@ -60,7 +61,7 @@ page {
 
 .sdate {
 	margin-top: 10rpx;
-	font-size: 30rpx;
+	font-size: 28rpx;
 	color: #888;
 }
 
@@ -76,8 +77,9 @@ page {
 .options {
 	display: flex;
 	flex-direction: row;
-	justify-content: space-around;
-	margin-top: 10rpx;
+	justify-content: space-between;
+	margin-top: 18rpx;
+	margin-left: 10rpx;
 }
 
 .delete {
@@ -103,4 +105,11 @@ page {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+}
+
+.empty {
+	font-size: 26rpx;
+	color: #888;
+	padding-top: 80rpx;
+	text-align: center;
 }

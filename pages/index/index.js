@@ -3,7 +3,7 @@
 const app = getApp()
 
 import { q } from '../../config/q'
-import { getHomeInfo } from '../../config/api'
+import { getHomeInfo, getVoucher } from '../../config/api'
 
 Page({
   data: {
@@ -24,23 +24,17 @@ Page({
     shortLineIcon: '../../static/imgs/index/shortLine.png',
     recommendBest: {},
     recommendCommon: [],
-    coupon: {
-      amount: 1000,
-      expiry: '2018.09.01',
-      status: 2,
-    },
     voucher: {},
+    voucherCount: 0,
   },
   onLoad: function () {
     this.initData();
   },
   initData() {
-    console.log('entry init........');
     q({
       url: getHomeInfo,
     }).then(res => {
       // 轮播图， 优惠券， 推荐线路
-      console.log('entry init........2222', res);
       let {carousel, voucher,  tourline } = res.data.data;
       let swiperItems = carousel && carousel.map(v => {
         return {
@@ -58,7 +52,7 @@ Page({
             banner: `${app.globalData.imageBase}${v.image.substring(1)}`,
             intro: v.brief,
             saled: v.sale,
-            price: v.price,
+            price: v.price / 100,
             city: v.city,
           }
         }else {
@@ -68,7 +62,7 @@ Page({
             banner: `${app.globalData.imageBase}${v.image.substring(1)}`,
             intro: v.brief,
             saled: v.sale,
-            price: v.price,
+            price: v.price / 100,
             city: v.city,
           })
         }
@@ -77,7 +71,9 @@ Page({
         swiperItems,
         recommendCommon,
         recommendBest,
-        voucher,
+        voucher: Object.assign(voucher, {
+          status: 1,
+        })
       })
     })
   },
@@ -92,28 +88,38 @@ Page({
       url: `/pages/search/search`
     })
   },
-  getCoupon() {
-    let { coupon } = this.data;
-    if(coupon.status == 2) {
-      wx.showToast({
-        title: '您已领取该优惠券',
-        icon: 'none', // "success", "loading", "none"
-        duration: 1500,
-        mask: false,
-        success: (res) => {
-        },
-        fail: (res) => {
-        },
-        complete: (res) => {
-        }
-      })
+  getCoupon(e) {
+    let { id } = e.currentTarget.dataset;
+    if(this.data.voucher.status == 2) {
       return;
     }
     q({
       url: getVoucher,
-      method: 'post'
+      method: 'post',
+      header: {
+        authorization: app.globalData.token,
+      },
+      data: {
+        id
+      }
     }).then(res => {
-      
+      wx.showToast({
+        title: '领取成功',
+        icon: 'success', // "success", "loading", "none"
+        duration: 1500,
+        mask: false,
+        success: (res) => {
+          this.setData({
+            'voucher.status': 2,
+          })
+        },
+        fail: (res) => {
+          
+        },
+        complete: (res) => {
+          
+        }
+      })
     })
   },
   handCategory(e) {

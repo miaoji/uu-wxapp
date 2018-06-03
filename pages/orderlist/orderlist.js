@@ -1,4 +1,10 @@
 // pages/orderlist/orderlist.js
+
+const app = getApp()
+
+import { q } from '../../config/q'
+import { deleteOrder, orderList } from '../../config/api'
+
 Page({
 
   /**
@@ -6,78 +12,7 @@ Page({
    */
   data: {
     list: [
-      {
-        date: '05-23',
-        image: '../../static/imgs/orderlist/demo.png',
-        name: '上海浦东软件园20日游园20日园20日',
-        startDate: '05/20',
-        endDate: '05/28',
-        price: '1900',
-        orderNo: '',
-      },
-      {
-        date: '05-23',
-        image: '../../static/imgs/orderlist/demo.png',
-        name: '上海浦东软件园20日游园20日园20日',
-        startDate: '05/20',
-        endDate: '05/28',
-        price: '1900',
-        orderNo: '',
-      },
-      {
-        date: '05-23',
-        image: '../../static/imgs/orderlist/demo.png',
-        name: '上海浦东软件园20日游园20日园20日',
-        startDate: '05/20',
-        endDate: '05/28',
-        price: '1900',
-        orderNo: '',
-      },
-      {
-        date: '05-23',
-        image: '../../static/imgs/orderlist/demo.png',
-        name: '上海浦东软件园20日游园20日园20日',
-        startDate: '05/20',
-        endDate: '05/28',
-        price: '1900',
-        orderNo: '',
-      },
-      {
-        date: '05-23',
-        image: '../../static/imgs/orderlist/demo.png',
-        name: '上海浦东软件园20日游园20日园20日',
-        startDate: '05/20',
-        endDate: '05/28',
-        price: '1900',
-        orderNo: '',
-      },
-      {
-        date: '05-23',
-        image: '../../static/imgs/orderlist/demo.png',
-        name: '上海浦东软件园20日游园20日园20日',
-        startDate: '05/20',
-        endDate: '05/28',
-        price: '1900',
-        orderNo: '',
-      },
-      {
-        date: '05-23',
-        image: '../../static/imgs/orderlist/demo.png',
-        name: '上海浦东软件园20日游园20日园20日',
-        startDate: '05/20',
-        endDate: '05/28',
-        price: '1900',
-        orderNo: '',
-      },
-      {
-        date: '05-23',
-        image: '../../static/imgs/orderlist/demo.png',
-        name: '上海浦东软件园20日游园20日园20日',
-        startDate: '05/20',
-        endDate: '05/28',
-        price: '1900',
-        orderNo: '',
-      }
+      
     ]
   },
 
@@ -101,7 +36,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    this.getorderList();
   },
 
   /**
@@ -139,8 +74,78 @@ Page({
   
   },
 
+  getorderList() {
+    console.log(app.globalData.token);
+    // 1.新订单 2.已确认 3.已完成
+    // pay_status: 0 未支付 
+    q({
+      url: orderList,
+      header: {
+        authorization: app.globalData.token,
+      }
+    }).then(res => {
+      console.log(res, res,);
+      let orders = res.data.data.orders;
+      let { count, rows } = orders;
+      if(count == 0) {
+        this.setData({
+          list: []
+        })
+      }else {
+        var list = [];
+        rows.forEach(v => {
+          if(v.order_status == 3) {
+            list.push( {
+              date: this.formatDate(v.pay_time),
+              image: v.image ? `${app.globalData.imageBase}${v.image.substring(1)}` : '',
+              name: v.tourline_name,
+              startDate: this.formatDate(v.start_time),
+              tour_total_day: v.tour_total_day || 0,
+              price: v.total_price !== 0 ? v.total_price / 100 : '',
+              orderNo: v.id,
+            })
+          }
+        })
+        this.setData({
+          list: list
+        })
+      }
+    })
+  },
+
   deleteOrder(e) {
     var id = e.currentTarget.dataset.orderno;
+    wx.showModal({
+      title: '提示',
+      content: '确定删除该订单吗',
+      confirmColor: '#70AAF4',
+      success: (res) => {
+        if (res.confirm) {
+          this.confirmDelete(id);
+        } else if (res.cancel) {
+        }
+      }
+    })
+  },
+
+  confirmDelete(id) {
+    q({
+      url: deleteOrder(id),
+      method: 'delete',
+      header: {
+        authorization: app.globalData.token,
+      }
+    }).then(res => {
+      wx.showToast({
+        title: '删除成功',
+        icon: 'none', // "success", "loading", "none"
+        duration: 1500,
+        mask: false,
+      })
+      setTimeout(() => {
+        this.getorderList();
+      }, 1500)
+    })
   },
 
   viewDetail(e) {
@@ -149,4 +154,15 @@ Page({
       url: `/pages/ordersuccess/ordersuccess?id=${id}`
     })
   },
+
+  formatDate(datee) {
+    var ts = new Date(datee);
+    var month = ts.getMonth() + 1;
+    var date = ts.getDate();
+    if(month > 9) {
+      return `${month}-${date}`;
+    }else {
+      return `0${month}-${date}`;
+    }
+  }
 })

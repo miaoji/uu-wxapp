@@ -1,5 +1,5 @@
 <!--pages/orderlist/orderlist.wxml-->
-<view class="list">
+<view class="list" wx:if="{{count}}">
 	<view class="item nopay" wx:for="{{nopaylist}}">
 		<view class="date">
 			预订日期：{{ item.date }}
@@ -10,7 +10,7 @@
 					{{ item.name }}
 				</view>
 				<view class="datescope">
-					{{ item.startDate }} 出发 {{ item.endDate }} 返程
+					出发：{{ item.startDate }}　　行程：{{ item.tour_total_day }} 天
 				</view>
 				<view class="price">
 					<view class="price-word">
@@ -22,7 +22,7 @@
 				</view>
 			</view>
 			<view class="option-pay">
-				<view class="cancel">
+				<view class="cancel" bind:tap="deleteOrder" data-orderNo="{{item.orderNo}}">
 					取消
 				</view>
 				<view class="submit">
@@ -40,18 +40,18 @@
 				<image class="timage" src="{{ item.image }}" mode="scaleToFill"></image>
 			</view>
 			<view class="detail">
-				<view class="name">
+				<view class="name2">
 					{{ item.name }}
 				</view>
 				<view class="sdate">
-					{{ item.startDate }} 至 {{ item.endDate }}
+					{{ item.adult }} 成人　{{ item.child }} 儿童
 				</view>
 				<view class="sdate">
-					{{ item.adult }} 成人 {{ item.child }} 儿童
+					出发：{{ item.startDate }}　行程：{{ item.tour_total_day }} 天
 				</view>
 				<view class="options">
 					<view class="delete">
-						已成交
+						已确认
 					</view>
 					<view class="view-detail" data-orderno="{{ item.orderNo }}" bind:tap="viewDetail">
 						订单详情
@@ -60,4 +60,8 @@
 			</view>
 		</view>
 	</view>
+</view>
+
+<view class="empty" wx:else>
+	暂无订单
 </view>

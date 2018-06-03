@@ -1,7 +1,7 @@
 <!--components/listitem/listitem.wxml-->
 <view class="list-item" bind:tap="goDetail" data-id="{{item.id}}}">
 	<view class="left">
-		<image class="item-banner" src="{{item.banner}}" mode="scaleToFill"></image>
+		<image class="item-banner" lazy-load="true" src="{{item.banner}}" mode="scaleToFill"></image>
 	</view>
 	<view class="right">
 		<view class="name">

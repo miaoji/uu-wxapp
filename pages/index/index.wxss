@@ -245,7 +245,7 @@
 	padding-left: 30rpx;
 }
 .first-right {
-	padding-left: 50rpx;
+	padding-left: 40rpx;
 }
 
 .active-bg {

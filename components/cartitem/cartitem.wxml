@@ -1,7 +1,7 @@
 <!--components/cartitem/cartitem.wxml-->
 <view class="cart-item" data-id="{{item.id}}" bind:tap="goDetail">
 	<view class="left">
-		<image class="cart-banner" src="{{item.banner}}" mode="scaleToFill"></image>
+		<image class="cart-banner" lazy-load="true" src="{{item.banner}}" mode="scaleToFill"></image>
 	</view>
 	<view class="right">
 		<view class="name">

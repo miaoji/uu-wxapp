@@ -3,8 +3,8 @@
 <view class="d-wrap">
 	<view class="intro">
 		<view class="banner">
-			<image class="banner-img" src="{{base.image}}" mode="scaleToFill"></image>
-			<!-- <text class="banner-number">线路编号：3333</text> -->
+			<image class="banner-img" src="{{ base.image }}" mode="scaleToFill"></image>
+			<text class="banner-number">{{ base.priceExplain }}</text>
 		</view>
 
 		<view class="title">
@@ -39,17 +39,17 @@
 	</view>
 
 	<view class="html-c">
-		<template is="wxParser" data="{{wxParserData:xc.nodes}}"/>
+		<template is="wxParser" data="{{ wxParserData:xc.nodes }}"/>
 	</view>
 
 	<view class="html-c">
-		<template is="wxParser" data="{{wxParserData:yd.nodes}}"/>
+		<template is="wxParser" data="{{ wxParserData:yd.nodes }}"/>
 	</view>
 
 	<view class="jg"></view>
 
 	<!-- 操作 -->
-	<view class="operation" wx:if="{{requestEnd}}">
+	<view class="operation" wx:if="{{ requestEnd }}">
 		<view class="cc">
 			<view class="cc-contact">
 				<button class="cs_button" open-type="contact" session-from="weapp">
@@ -82,8 +82,10 @@
 					wx:for="{{tourlineItem}}"
 					data-index="{{index}}"
 					data-id="{{item.id}}"
+					data-adult_sale_price="{{item.adult_sale_price}}"
+					data-child_sale_price="{{item.child_sale_price}}"
 					catch:tap="selectline">
-				{{ item.start_time }}  {{ item.adult_sale_price }}元/人  {{ item.child_sale_price }}元/儿童
+				{{ item.start_time }}  {{ item.adult_sale_price / 100}}元/人  {{ item.child_sale_price / 100 }}元/儿童
 			</view>
 		</view>
 		<view class="c-title">

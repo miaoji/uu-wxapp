@@ -1,4 +1,10 @@
 // pages/notusedorder/notusedorder.js
+
+const app = getApp()
+
+import { q } from '../../config/q'
+import { orderList, deleteOrder } from '../../config/api'
+
 Page({
 
   /**
@@ -6,37 +12,11 @@ Page({
    */
   data: {
     list: [
-      {
-        date: '05-23',
-        image: '../../static/imgs/orderlist/demo.png',
-        name: '上海浦东软件园20日游园20日园20日',
-        startDate: '05/20',
-        endDate: '05/28',
-        orderNo: '',
-        adult: '1',
-        child: '2'
-      },
-      {
-        date: '05-23',
-        image: '../../static/imgs/orderlist/demo.png',
-        name: '上海浦东软件园20日游园20日园20日',
-        startDate: '05/20',
-        endDate: '05/28',
-        orderNo: '',
-        adult: '1',
-        child: '2'
-      },
     ],
     nopaylist: [
-      {
-        date: '05-23',
-        name: '上海浦东软件园20日游园20日园20日日园20日日园20日',
-        startDate: '05/20',
-        endDate: '05/28',
-        orderNo: '',
-        price: '1900'
-      }
-    ]
+      
+    ],
+    count: false,
   },
 
   /**
@@ -59,7 +39,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    this.getorderList();
   },
 
   /**
@@ -94,6 +74,110 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
-  }
+    
+  },
+
+  getorderList() {
+    // 1.新订单 2.已确认 3.已完成
+    // pay_status: 0 未支付 
+    q({
+      url: orderList,
+      header: {
+        authorization: app.globalData.token,
+      }
+    }).then(res => {
+      let orders = res.data.data.orders;
+      let { count, rows } = orders;
+      if(count == 0) {
+        this.setData({
+          count: false
+        })
+      }else {
+        var nopaylist = [];
+        var list = [];
+        rows.forEach(v => {
+          if(v.order_status == 1 && v.pay_status == 0) {
+            nopaylist.push({
+              date: this.formatDate(v.pay_time),
+              image: v.image ? `${app.globalData.imageBase}${v.image.substring(1)}` : '',
+              name: v.tourline_name,
+              startDate: this.formatDate(v.start_time),
+              tour_total_day: v.tour_total_day || 0,
+              price: v.total_price !== 0 ? v.total_price / 100 : '',
+              orderNo: v.id,
+            }) 
+          }
+          if(v.order_status == 1 && v.pay_status == 1) {
+            list.push({
+              date: this.formatDate(v.pay_time),
+              image: v.image ? `${app.globalData.imageBase}${v.image.substring(1)}` : '',
+              name: v.tourline_name,
+              startDate: this.formatDate(v.start_time),
+              tour_total_day: v.tour_total_day || 0,
+              price: v.total_price !== 0 ? v.total_price / 100 : '',
+              orderNo: v.id,
+              adult: v.adult_count,
+              child: v.child_count,
+            }) 
+          }
+        })
+        this.setData({
+          nopaylist: nopaylist,
+          list: list,
+          count: true,
+        })
+      }
+    })
+  },
+
+  viewDetail(e) {
+    var id = e.currentTarget.dataset.orderno;
+    wx.navigateTo({
+      url: `/pages/ordersuccess/ordersuccess?id=${id}`
+    })
+  },
+
+  formatDate(datee) {
+    var ts = new Date(datee);
+    var month = ts.getMonth() + 1;
+    var date = ts.getDate();
+    if(month > 9) {
+      return `${month}-${date}`;
+    }else {
+      return `0${month}-${date}`;
+    }
+  },
+
+  deleteOrder(e) {
+    var id = e.currentTarget.dataset.orderno;
+    console.log(e);
+    wx.showModal({
+      title: '提示',
+      content: '确定取消该订单吗',
+      success: (res) => {
+        if (res.confirm) {
+          this.confirmDelete(id);
+        } else if (res.cancel) {
+        }
+      }
+    })
+  },
+
+  confirmDelete(id) {
+    q({
+      url: deleteOrder(id),
+      method: 'delete',
+      header: {
+        authorization: app.globalData.token,
+      }
+    }).then(res => {
+      wx.showToast({
+        title: '取消成功',
+        icon: 'none', // "success", "loading", "none"
+        duration: 1500,
+        mask: false,
+      })
+      this.getorderList();
+    })
+  },
 })
