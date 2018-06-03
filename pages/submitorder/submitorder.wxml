@@ -28,7 +28,7 @@
 				<view class="content">
 					<view class="name">
 					  <view class="red-word">
-					  	2018-05-20（周六）
+					  	{{ start_time }}
 					  </view>       
 					  <view>
 					  	 出发天数：   {{ tour_total_day }}
@@ -92,14 +92,11 @@
 		</view>
 	</view>
 
-	<view class="remark">
-		<view class="ctitle remark-title">备注</view>
-		<textarea 
-			class="remark-input"
-			placeholder-style="font-size: 26rpx;color: #888;"
-			placeholder="请填写备注内容" 
-			maxlength="120"
-			name="textarea"/>
+	<view class="remark-wrap">
+		<view class="ctitle">备注</view>
+		<view class="remark">
+			{{ order_memo }}
+		</view>
 	</view>
 
 	<view class="operation">
@@ -112,11 +109,8 @@
 		</view>
 		<view class="buy">
 			<view class="total">
-				<view class="youhui">
-					优惠：-￥40
-				</view>
 				<view>
-					总额：￥1870
+					总额：￥{{price}}
 				</view>
 			</view>
 			<button class="buy-btn" bind:tap="handleOrder">

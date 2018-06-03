@@ -15,9 +15,9 @@ Page({
     wx.setNavigationBarTitle({
       title: '支付成功',
     })
-    var orderNo = options.orderNo;
+    var id = options.id;
     this.setData({
-      orderNo
+      orderNo: id
     })
   },
 

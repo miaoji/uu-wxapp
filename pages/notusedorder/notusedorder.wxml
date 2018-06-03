@@ -25,7 +25,7 @@
 				<view class="cancel" bind:tap="deleteOrder" data-orderNo="{{item.orderNo}}">
 					取消
 				</view>
-				<view class="submit">
+				<view class="submit" bind:tap="handleContinue" data-orderNo="{{item.orderNo}}">
 					继续预订
 				</view>
 			</view>

@@ -1,5 +1,5 @@
 <!--pages/makeorder/makeorder.wxml-->
-<scroll-view class="wrap">
+<scroll-view class="wrap" scroll-with-animation="true" scroll-top="{{scrollTop}}">
 	
 	<view class="detail">
 		<view class="d-content">
@@ -30,7 +30,7 @@
 				<view class="content">
 					<view class="name">
 					  <view class="red-word">
-					  	2018-05-20（周六）
+					  	{{ start_time }}
 					  </view>       
 					  <view>
 					  	 出发天数：   {{ tour_total_day }}
@@ -119,6 +119,18 @@
 				bindinput="handlePphoneInput"></input>
 			</view>
 		</view>
+	</view>
+
+	<view class="remark">
+		<view class="ctitle remark-title">备注</view>
+		<input 
+			class="remark-input"
+			placeholder-style="font-size: 26rpx;color: #888;"
+			placeholder="请填写备注内容（可不填）" 
+			maxlength="120"
+			value="{{meno}}"
+			bindinput="handleRemarkInput"
+			name="textarea"/>
 	</view>
 
 	<view class="coupon" bind:tap="chooseCoupon">

@@ -65,7 +65,7 @@ page {
 
 .traveller-info {
 	padding: 40rpx 0;
-	margin-bottom: 60rpx;
+	margin-bottom: 20rpx;
 	background-color: #FFF;
 }
 .contacter {
@@ -206,15 +206,14 @@ page {
 	background-color: #F1F2F3;
 }
 
-.remark {
-	background: #FFF;
-	padding: 40rpx 0;
+.remark-wrap {
+	background-color: #FFF;
+	padding: 20rpx 0;
 	padding-left: 60rpx;
 }
-.remark-title {
-	margin-bottom: 20rpx;
-}
-.remark-input {
-	font-size: 30rpx;
-	height: 150rpx;
+
+.remark {
+	font-size: 27rpx;
+	color: #353535;
+	margin-top: 10rpx;
 }

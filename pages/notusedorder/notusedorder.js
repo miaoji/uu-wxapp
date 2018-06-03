@@ -154,6 +154,7 @@ Page({
     wx.showModal({
       title: '提示',
       content: '确定取消该订单吗',
+      confirmColor: '#70AAF4',
       success: (res) => {
         if (res.confirm) {
           this.confirmDelete(id);
@@ -177,7 +178,16 @@ Page({
         duration: 1500,
         mask: false,
       })
-      this.getorderList();
+      setTimeout(() => {
+        this.getorderList();
+      }, 1500)
     })
   },
+
+  handleContinue(e) {
+    var id = e.currentTarget.dataset.orderno;
+    wx.navigateTo({
+      url: `/pages/submitorder/submitorder?orderId=${id}&from=list`
+    })
+  }
 })

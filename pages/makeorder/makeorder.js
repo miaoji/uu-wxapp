@@ -3,7 +3,7 @@
 const app = getApp()
 
 import { q } from '../../config/q'
-import { orderDetail, getVoucherList } from '../../config/api'
+import { orderDetail, getVoucherList, addContacter, addTraveller} from '../../config/api'
 
 Page({
 
@@ -37,8 +37,10 @@ Page({
     orderId: '',
     price: 0,
     basePrice: 0,
+    start_time: '',
     couponId: '',
     couponIdMoney: '',
+    meno: '',
     couponName: '暂无优惠券',
     tourline_name: '',
     adult_count: '',
@@ -177,6 +179,13 @@ Page({
       persons: persons
     })
   },
+
+  handleRemarkInput(e) {
+    this.setData({
+      'meno': e.detail.value
+    })
+  },
+
   getOrderDetail() {
     var personItem = this.data.personItem;
     var newPersons = [];
@@ -194,6 +203,7 @@ Page({
         child_count,
         tourline_name,
         tour_total_day,
+        start_time: this.formateDate(start_time),
         persons: newPersons,
       })
     })
@@ -205,6 +215,7 @@ Page({
     let travelError = '';
     let phoneReg = /^1[34578]\d{9}$/;
     let emailReg = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+    let idcardReg = /^\d{6}(18|19|20)?\d{2}(0[1-9]|1[012])(0[1-9]|[12]\d|3[01])\d{3}(\d|[xX])$/;
     if(name == '') {
       contactError = '请输入真实联系人姓名';
     }else if(phone == '' || !phoneReg.test(phone)) {
@@ -223,14 +234,70 @@ Page({
       })
       return;
     }
-    this.data.persons.forEach((index, v) => {
-      
+    this.data.persons.some((index, v) => {
+      console.log(index, v, 'some filter');
     })
+    this.handleaddContacter();
+  },
+
+  // 添加联系人
+  handleaddContacter() {
+    var { contact } = this.data;
+    var { name, phone: mobile, email, address} = contact;
+    q({
+      url: addContacter,
+      method: 'post',
+      header: {
+        authorization: app.globalData.token,
+      },
+      data: {
+        orderId: this.data.orderId,
+        name, 
+        mobile, 
+        email, 
+        address, 
+        memo: this.data.meno || '',
+      }
+    }).then(res => {
+      this.handleaddTraveller();
+    })
+  },
+  // 添加出行人
+  handleaddTraveller() {
+    var travellers = this.data.persons.map(v => {
+      return {
+        name: v.name, 
+        sn: v.idcard,
+        mobile: v.phone,
+        type: v.index2,
+      }
+    })
+    q({
+      url: addTraveller,
+      method: 'post',
+      header: {
+        authorization: app.globalData.token,
+      },
+      data: {
+        orderId: this.data.orderId,
+        list: travellers,
+      }
+    }).then(res => {
+       this.handleOrderSubmit();
+    })
+  },
+
+  handleOrderSubmit() {
     var contacter = JSON.stringify(this.data.contact);
     var travellers = JSON.stringify(this.data.persons);
-    var orderId = this.data.orderId;
+    try {
+        wx.setStorageSync('contacter', contacter);
+        wx.setStorageSync('travellers', travellers);
+    } catch (e) {    
+    }
+    var { orderId, price, couponId} = this.data;
     wx.navigateTo({
-      url: `/pages/submitorder/submitorder?contacter=${contacter}&travellers=${travellers}&orderId=${orderId}`,
+      url: `/pages/submitorder/submitorder?orderId=${orderId}&couponId=${couponId}&price=${price}`,
     })
   },
 
@@ -269,13 +336,24 @@ Page({
         this.setData({
           couponName: `-${limited_voucher[0].money / 100}`,
           price: this.data.basePrice - limited_voucher[0].money / 100,
+          couponId: limited_voucher[0].id,
         })
       }else if(unlimited_voucher.length) {
         this.setData({
           couponName: `-${unlimited_voucher[0].money / 100}`,
           price: this.data.basePrice - unlimited_voucher[0].money / 100,
+          couponId: unlimited_voucher[0].id,
         })
       }
     })
   },
+
+  formateDate(time) {
+    var string = time.split('T')[0];
+    var day = new Date(time).getDay();
+    var weekday=["周日","周一","周二","周三","周四","周五","周六"];
+    string += ` ${weekday[day]}`;
+    return string;
+  }
+
 })

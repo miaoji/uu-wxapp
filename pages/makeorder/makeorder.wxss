@@ -227,3 +227,17 @@ page {
 	text-align: center;
 	padding: 10rpx 0;
 }
+
+.remark {
+	background: #FFF;
+	padding: 40rpx 0;
+	padding-left: 60rpx;
+	margin-bottom: 20rpx;
+}
+.remark-title {
+	margin-bottom: 20rpx;
+}
+.remark-input {
+	font-size: 30rpx;
+	height: 150rpx;
+}

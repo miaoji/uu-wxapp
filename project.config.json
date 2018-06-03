@@ -30,7 +30,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
+			"current": 7,
 			"list": [
 				{
 					"id": 0,
@@ -105,10 +105,10 @@
 					"query": "orderId=138"
 				},
 				{
-					"id": -1,
+					"id": 12,
 					"name": "ordersuccess",
 					"pathName": "pages/ordersuccess/ordersuccess",
-					"query": ""
+					"query": "id=293"
 				},
 				{
 					"id": -1,

@@ -12,22 +12,10 @@ Page({
    */
   data: {
     contacter: {
-      name: '张浩',
-      phone: '18601714102',
-      email: 'arronf2e@163.com',
-      address: '上海杨浦区创智天地',
+      
     },
     travellers: [
-      {
-        name: '张浩1',
-        phone: '18601714102',
-        idcard: '320788373736663652',
-      },
-      {
-        name: '张浩2',
-        phone: '18601714102',
-        idcard: '320788373736663652',
-      },
+      
     ],
     wechatIcon: '../../static/imgs/detail/contact.png',
     orderId: '',
@@ -35,6 +23,11 @@ Page({
     adult_count: '',
     child_count: '',
     orderId: '',
+    couponId: '',
+    isFromList: '',
+    price: 0,
+    start_time: '',
+    order_memo: '',
   },
 
   /**
@@ -42,17 +35,20 @@ Page({
    */
   onLoad: function (options) {
 
-    var contacter = JSON.parse(options.contacter);
-    var travellers = JSON.parse(options.travellers);
-
-    var orderId = options.orderId;
-
+    var { price, orderId, from: isFromList, couponId } = options;
 
     this.setData({
-      orderId
+      orderId,
+      isFromList: isFromList || '',
+      couponId: couponId || '',
+      price: price || 0,
     })
 
-    this.initOrderInfo(contacter, travellers);
+    if(isFromList) {
+      
+    }else {
+      this.initOrderInfo();
+    }
 
     wx.setNavigationBarTitle({
       title: '确认订单',
@@ -117,7 +113,16 @@ Page({
   
   },
 
-  initOrderInfo(contacter, travellers) {
+  initOrderInfo() {
+
+    try {
+      var contacter = JSON.parse(wx.getStorageSync('contacter'));
+      var travellers = JSON.parse(wx.getStorageSync('travellers'));
+    } catch (e) {
+    }
+
+    console.log(contacter, travellers, 'travellers');
+
     this.setData({
       contacter: contacter,
       travellers: travellers,
@@ -134,7 +139,8 @@ Page({
       },
     }).then(res => {
       let { order } = res.data.data;
-      let { adult_count, child_count, tourline_name, start_time, tour_total_day } = order;
+      let { adult_count, child_count, tourline_name, start_time, tour_total_day, 
+            address, appoint_email, appoint_mobile, appoint_name, tourists, price, order_memo} = order;
       newPersons = new Array(adult_count + child_count).fill(personItem);
       this.setData({
         adult_count,
@@ -142,8 +148,38 @@ Page({
         tourline_name,
         tour_total_day,
         persons: newPersons,
+        start_time: this.formateDate(start_time),
+        order_memo: order_memo || '无',
       })
+      if(this.data.isFromList) {
+        var travellers = tourists.map(v => {
+          return {
+            name: v.name,
+            phone: v.mobile,
+            idcard: v.paper_sn,
+          }
+        });
+        var contacter = {
+          name: appoint_name,
+          phone: appoint_mobile,
+          email: appoint_email,
+          address: address,
+        }
+        this.setData({
+          contacter: contacter,
+          travellers: travellers,
+          price: price / 100,
+        })
+      }
     })
+  },
+
+  formateDate(time) {
+    var string = time.split('T')[0];
+    var day = new Date(time).getDay();
+    var weekday=["周日","周一","周二","周三","周四","周五","周六"];
+    string += ` ${weekday[day]}`;
+    return string;
   },
 
   handleOrder() {
@@ -155,7 +191,7 @@ Page({
       },
       data: {
         orderId: this.data.orderId,
-        voucherId: '',
+        voucherId: this.data.couponId,
       }
     }).then(res => {
       this.handlePay(res.data.data);
@@ -165,7 +201,7 @@ Page({
   handlePay(res) {
     let {timeStamp, nonceStr, paySign} = res;
     let packageCode = res.package;
-    console.log(timeStamp, nonceStr, paySign, packageCode, 'test');
+    let orderId = this.data.orderId;
     wx.requestPayment({
      timeStamp,
      nonceStr,
@@ -174,13 +210,12 @@ Page({
      paySign,
      success: (res) => {
         wx.navigateTo({
-          url: `/pages/paysuccess/paysuccess?orderId=${this.data.orderId}`,
+          url: `/pages/paysuccess/paysuccess?id=${orderId}`,
         })
      },
      fail: (res) => {
-        console.log(res, 'failed res');
         wx.navigateTo({
-          url: `/pages/payfailed/payfailed?orderId=${this.data.orderId}`,
+          url: `/pages/payfailed/payfailed?orderId=${orderId}`,
         })
      }
   })

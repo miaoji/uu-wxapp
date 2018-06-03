@@ -4,6 +4,11 @@ page {
 .base-content {
 	background-color: #FFF;
 }
+
+.order {
+	padding-bottom: 120rpx;
+}
+
 .order-info {
 	padding: 0 20rpx;
 	padding-bottom: 15rpx;
@@ -45,7 +50,7 @@ page {
 }
 .traveller-info {
 	padding: 40rpx 0;
-	margin-bottom: 150rpx;
+	/*margin-bottom: 150rpx;*/
 }
 .contacter {
 	border-bottom: 1rpx solid #888;
@@ -128,4 +133,24 @@ page {
 	width: 44rpx;
 	height: 44rpx;
 	margin-right: 20rpx;
+}
+
+.remark-wrap {
+	margin-top: 20rpx;
+	background-color: #FFF;
+	padding: 20rpx 0;
+	padding-left: 60rpx;
+}
+
+.remark {
+	font-size: 27rpx;
+	color: #353535;
+	margin-top: 10rpx;
+}
+
+.back-index {
+	padding-top: 80rpx;
+	font-size: 26rpx;
+	color: #70AAF4;
+	text-align: center;
 }

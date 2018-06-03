@@ -31,7 +31,7 @@ const deleteOrder = id => `${baseUrl}/order/tourline/${id}`;   // 删除订单
 
 const addTraveller = `${baseUrl}/order/tourline/tourist`;   // 添加出行人
 
-const addContacter = `${baseUrl}/tourline/linkman`;   // 添加联系人
+const addContacter = `${baseUrl}/order/tourline/linkman`;   // 添加联系人
 
 const orderDetail = id => `${baseUrl}/order/tourline/${id}`;   // 订单详情
 
