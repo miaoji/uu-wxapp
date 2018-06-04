@@ -3,7 +3,7 @@
 const app = getApp()
 
 import { q } from '../../config/q'
-import { orderDetail, payOrder } from '../../config/api'
+import { orderDetail, payOrder, getVoucherList } from '../../config/api'
 
 Page({
 
@@ -28,6 +28,10 @@ Page({
     price: 0,
     start_time: '',
     order_memo: '',
+    couponName: '',
+    price: 0,
+    couponId: '',
+    couponList: [],
   },
 
   /**
@@ -45,7 +49,7 @@ Page({
     })
 
     if(isFromList) {
-      
+      this.getVoucherList();
     }else {
       this.initOrderInfo();
     }
@@ -180,6 +184,42 @@ Page({
     var weekday=["周日","周一","周二","周三","周四","周五","周六"];
     string += ` ${weekday[day]}`;
     return string;
+  },
+
+  getVoucherList() {
+    q({
+      url: getVoucherList,
+      header: {
+        authorization: app.globalData.token,
+      }
+    }).then(res => {
+      let { limited_voucher, unlimited_voucher } = res.data.data;
+      var couponList = [];
+      if(!limited_voucher.length && !unlimited_voucher.length) {
+        this.setData({
+          couponName: '暂无优惠券'
+        })
+      }else if(limited_voucher.length){
+        this.setData({
+          couponName: `-${limited_voucher[0].money / 100}`,
+          price: this.data.basePrice - limited_voucher[0].money / 100,
+          couponId: limited_voucher[0].id,
+        })
+      }else if(unlimited_voucher.length) {
+        this.setData({
+          couponName: `-${unlimited_voucher[0].money / 100}`,
+          price: this.data.basePrice - unlimited_voucher[0].money / 100,
+          couponId: unlimited_voucher[0].id,
+        })
+      }
+      var couponList = [];
+      if(limited_voucher.length || unlimited_voucher.length) {
+        couponList = [...limited_voucher, ...unlimited_voucher];
+        this.setData({
+          couponList: couponList,
+        })
+      }
+    })
   },
 
   handleOrder() {

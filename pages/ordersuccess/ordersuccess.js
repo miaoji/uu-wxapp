@@ -102,7 +102,7 @@ Page({
     }).then(res => {
       let { order } = res.data.data;
       let { adult_count, child_count, tourline_name, start_time, tour_total_day, 
-            address, appoint_email, appoint_mobile, appoint_name, tourists, price, sn, pay_time, order_memo} = order;
+            address, appoint_email, appoint_mobile, appoint_name, tourists, price, sn, pay_time, order_memo, priceExplain} = order;
       var travellers = tourists.map(v => {
         return {
           name: v.name,
@@ -127,6 +127,7 @@ Page({
         tNumber: '',
         totalMoney: price / 100,
         order_memo: order_memo || '无',
+        priceExplain: priceExplain || '',
       }
       this.setData({
         order: orderInfo,

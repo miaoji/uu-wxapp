@@ -197,7 +197,10 @@ Page({
     }).then(res => {
       let { order } = res.data.data;
       let { adult_count, child_count, tourline_name, start_time, tour_total_day } = order;
-      newPersons = new Array(adult_count + child_count).fill(personItem);
+      for(var i = 0; i < adult_count + child_count; i ++) {
+        var obj = this.deepClone(personItem);
+        newPersons.push(obj);
+      }
       this.setData({
         adult_count,
         child_count,
@@ -211,8 +214,8 @@ Page({
   handleOrder() {
     // 联系人验证
     let {name, phone, email, address} = this.data.contact;
-    let contactError = '';
-    let travelError = '';
+    var contactError = '';
+    var travelError = '';
     let phoneReg = /^1[34578]\d{9}$/;
     let emailReg = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
     let idcardReg = /^\d{6}(18|19|20)?\d{2}(0[1-9]|1[012])(0[1-9]|[12]\d|3[01])\d{3}(\d|[xX])$/;
@@ -234,9 +237,33 @@ Page({
       })
       return;
     }
-    this.data.persons.some((index, v) => {
-      console.log(index, v, 'some filter');
-    })
+    try {
+      this.data.persons.forEach((v, index) => {
+        if(v.name == '') {
+          throw `请填写第${index + 1}位旅客的姓名`;
+          // throw 'haha'
+        }
+        if(v.idcard == '') {
+          throw `请正确填写第${index + 1}位旅客的证件号`;
+        }
+        if(v.index2 == 1 && !idcardReg.test(v.idcard)) {
+          throw `请正确填写第${index + 1}位旅客的身份证号`;
+        }
+        if(v.phone == '' || !phoneReg.test(v.phone)) {
+          throw `请正确填写第${index + 1}位旅客的手机号`;
+        }
+      })
+    }catch(e) {
+      if(e) {
+        wx.showToast({
+          title: e,
+          icon: 'none', // "success", "loading", "none"
+          duration: 1000,
+          mask: false,
+        })
+        return;
+      }
+    }
     this.handleaddContacter();
   },
 
@@ -303,7 +330,6 @@ Page({
 
   bindPickerChange(e) {
     var index = e.currentTarget.dataset.index;
-    console.log(index, 'index');
     var value = e.detail.value;
     var persons = this.data.persons;
     console.log(e, 'picker发送选择改变，携带值为', e.detail.value, index)
@@ -354,6 +380,13 @@ Page({
     var weekday=["周日","周一","周二","周三","周四","周五","周六"];
     string += ` ${weekday[day]}`;
     return string;
-  }
+  },
+
+  deepClone (obj) {
+    var _tmp,result;
+    _tmp = JSON.stringify(obj);
+    result = JSON.parse(_tmp);
+    return result;
+  } 
 
 })

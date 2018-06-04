@@ -27,7 +27,7 @@
 				实付款：<text class="red-money">￥{{ order.totalMoney }}</text>
 			</view>
 			<view class="tnumber">
-				线路编号：{{ order.tNumber }}
+				{{ order.priceExplain }}
 			</view>
 		</view>
 	</view>
