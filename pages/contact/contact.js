@@ -7,7 +7,8 @@ Page({
   data: { 
     wechatIcon: '../../static/imgs/contact/wechat.png',
     phoneIcon: '../../static/imgs/contact/phone.png',
-    phoneNumber: '123456789123'
+    phoneNumbers: ['021-34141583','021-64753853'],
+    showModal: false,
   },
 
   /**
@@ -68,20 +69,24 @@ Page({
   
   },
 
-  calling: function() {
+  calling: function(e) {
+    var number = e.currentTarget.dataset.number;
     var _this = this;
-    wx.showModal({
-      title: '提示',
-      content: `确定呼叫：${_this.data.phoneNumber}`,
-      success: function (res) {
-        if (res.confirm) {
-          wx.makePhoneCall({
-            phoneNumber: _this.data.phoneNumber
-          })
-        } else if (res.cancel) {
-          console.log('用户点击取消')
-        }
+    wx.makePhoneCall({
+      phoneNumber: number,
+      success: function() {
+        _this.closeModal();
       }
+    })
+  },
+  openModal() {
+    this.setData({
+      showModal: true,
+    })
+  },
+  closeModal() {
+    this.setData({
+      showModal: false,
     })
   }
 })
