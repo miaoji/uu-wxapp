@@ -5,7 +5,7 @@
 
 .company-banner {
 	width: 100%;
-	height: 130rpx;
+	height: 180rpx;
 }
 
 .swiper-item {
@@ -261,4 +261,8 @@
 }
 .f1f2f3 {
 	color: #f1f2f3;
+}
+
+.redword {
+	color: #FF0000;
 }

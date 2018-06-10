@@ -48,6 +48,7 @@
         <view class="intro">
           <view>代金券</view>
           <view>全场任意使用</view>
+          <view class="redword">本券不可叠加使用</view>
         </view>
       </view>
       <block wx:if="{{voucher.status == 1}}">
@@ -75,7 +76,7 @@
   	</view>
   	<view class="cgitem shortLine" data-type="rest" bind:tap="handCategory">
   		<image class="line-icon" src="{{shortLineIcon}}" mode="scaleToFill"></image>
-  		<text>爆款尾单</text>
+  		<text>特价尾单</text>
   	</view>
   </view>
   <!-- recommend -->

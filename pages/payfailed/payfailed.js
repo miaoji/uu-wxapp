@@ -67,7 +67,7 @@ Page({
   },
   goOrderList() {
     wx.navigateTo({
-      url: '/pages/notusedorder/notusedorder'
+      url: '/pages/notusedorder/notusedorder?type=nopay'
     })
   }
 })

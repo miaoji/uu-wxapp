@@ -44,7 +44,7 @@
       },
       {
         "pagePath": "pages/shopping-cart/shopping-cart",
-        "text": "购物车",
+        "text": "收藏",
         "iconPath": "./static/imgs/common/cart.png",
         "selectedIconPath": "./static/imgs/common/cart-select.png"
       },

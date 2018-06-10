@@ -96,7 +96,13 @@ Page({
 
   handleNopayList() {
     wx.navigateTo({
-      url: '/pages/notusedorder/notusedorder'
+      url: '/pages/notusedorder/notusedorder?type=nopay'
+    })
+  },
+
+  handleWaitpayList() {
+    wx.navigateTo({
+      url: '/pages/notusedorder/notusedorder?type=waitpay'
     })
   },
 

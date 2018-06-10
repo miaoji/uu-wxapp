@@ -17,14 +17,25 @@ Page({
       
     ],
     count: false,
+    type: '',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.setNavigationBarTitle({
-      title: '未出行订单',
+    var type = options.type;
+    if(type == 'nopay') {
+      wx.setNavigationBarTitle({
+        title: '待付款订单',
+      })
+    }else {
+      wx.setNavigationBarTitle({
+        title: '未出行订单',
+      })
+    }
+    this.setData({
+      type: type,
     })
   },
 

@@ -15,6 +15,7 @@ Page({
     keyword: '',
     searchResult: [],
     showList: false,
+    history: [],
   },
 
   /**
@@ -37,7 +38,16 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    var his = wx.getStorageSync('history');
+    if(!his) {
+      this.setData({
+        history: [],
+      })
+    }else {
+      this.setData({
+        history: JSON.parse(his),
+      })
+    }
   },
 
   /**
@@ -81,13 +91,37 @@ Page({
     })
   },
 
+  chooseHistory(e) {
+    this.setData({
+      keyword: e.currentTarget.dataset.item,
+      showList: true,
+    })
+    this.handleSearch();
+  },
+
   handleSearch() {
-    console.log(this.data.keyword);
+    if(this.data.keyword == '') {
+      wx.showToast({
+        title: '请输入目的地、景点',
+        icon: 'none', // "success", "loading", "none"
+        duration: 1000,
+        mask: false,
+        success: (res) => {
+          
+        },
+        fail: (res) => {
+          
+        },
+        complete: (res) => {
+          
+        }
+      })
+      return;
+    }
     q({
       url: searchByKeyword(this.data.keyword),
     }).then(res => {
       let result = res.data.data;
-      console.log(res);
       if(result.length) {
         let searchResult = result.map(v => {
           return {
@@ -99,9 +133,19 @@ Page({
             price: v.price / 100,
           }
         })
+        var his = this.data.history;
+        if(!his.includes(this.data.keyword)) {
+          his.push(this.data.keyword);
+        }
         this.setData({
-          searchResult: searchResult
+          searchResult: searchResult,
+          history: his,
         })
+        try {
+            wx.setStorageSync('history', JSON.stringify(his));
+        } catch (e) {
+            
+        }
       }else {
         this.setData({
           searchResult: []

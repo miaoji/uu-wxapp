@@ -10,6 +10,9 @@
 		<view class="advance">
 			提前报名：<text class="advance-text">建议提前{{item.advance}}天以上</text>
 		</view>
+		<view class="delete" data-id="{{item.id}}" catch:tap="deleteCartItem">
+			删除
+		</view>
 		<view class="sale-and-price">
 			<view class="saled">
 				销量：{{item.saled}}

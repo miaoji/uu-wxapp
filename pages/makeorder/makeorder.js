@@ -3,7 +3,7 @@
 const app = getApp()
 
 import { q } from '../../config/q'
-import { orderDetail, getVoucherList, addContacter, addTraveller} from '../../config/api'
+import { orderDetail, getVoucherList, addContacter, addTraveller, makeOrder, deleteTraveller} from '../../config/api'
 
 Page({
 
@@ -25,7 +25,7 @@ Page({
       name: '',
       idcard: '',
       phone: '',
-      index2: 1,
+      index2: 0,
     },
     nameIcon: '../../static/imgs/makeorder/name.png',
     phoneIcon: '../../static/imgs/makeorder/phone.png',
@@ -45,7 +45,7 @@ Page({
     tourline_name: '',
     adult_count: '',
     child_count: '',
-    idTypeArray: ['', '身份证', '护照', '军官证', '港澳通行证', '台胞证', '其他' ],
+    idTypeArray: ['身份证', '护照', '军官证', '港澳通行证', '台胞证', '其他' ],
   },
 
   /**
@@ -95,20 +95,28 @@ Page({
    */
   onShow: function () {
     this.getOrderDetail();
+    // var contacter = wx.getStorageSync('contacter');
+    // var travellers = wx.getStorageSync('travellers');
+    // var contacter = JSON.parse(contacter);
+    // var travellers = JSON.parse(travellers);
+    // this.setData({
+    //   contact: contacter,
+    //   persons: travellers,
+    // })
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+    
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+    
   },
 
   /**
@@ -196,7 +204,7 @@ Page({
       },
     }).then(res => {
       let { order } = res.data.data;
-      let { adult_count, child_count, tourline_name, start_time, tour_total_day } = order;
+      let { adult_count, child_count, tourline_name, start_time, tour_total_day, appoint_name, appoint_mobile, appoint_email, address, tourists } = order;
       for(var i = 0; i < adult_count + child_count; i ++) {
         var obj = this.deepClone(personItem);
         newPersons.push(obj);
@@ -209,6 +217,27 @@ Page({
         start_time: this.formateDate(start_time),
         persons: newPersons,
       })
+      if(appoint_name) {
+        var contacter = {
+          name: appoint_name,
+          phone: appoint_mobile,
+          email: appoint_email,
+          address: address,
+        }
+        var travellers = tourists.map(v => {
+          return {
+            name: v.name,
+            phone: v.mobile,
+            idcard: v.paper_sn,
+            index2: v.paper_type,
+          }
+        });
+        this.setData({
+          contact: contacter,
+          persons: travellers,
+        })
+        this.deleteTraveller();
+      }
     })
   },
   handleOrder() {
@@ -315,6 +344,8 @@ Page({
   },
 
   handleOrderSubmit() {
+    var { orderId, price, couponId} = this.data;
+
     var contacter = JSON.stringify(this.data.contact);
     var travellers = JSON.stringify(this.data.persons);
     try {
@@ -322,7 +353,28 @@ Page({
         wx.setStorageSync('travellers', travellers);
     } catch (e) {    
     }
-    var { orderId, price, couponId} = this.data;
+
+    // q({
+    //   url: makeOrder,
+    //   method: 'post',
+    //   header: {
+    //     authorization: app.globalData.token,
+    //   },
+    //   data: {
+    //     itemId: this.data.selectlineId,
+    //     adultCount: this.data.adultCount,
+    //     childCount: this.data.childCount,
+    //   }
+    // }).then(res => {
+    //   let {orderId} = res.data.data;
+    //   var price = this.data.adultCount * this.data.adult_sale_price / 100 + this.data.childCount  * this.data.child_sale_price / 100; 
+    //   this.hidecWrap();
+    //   wx.navigateTo({
+    //     url: `/pages/makeorder/makeorder?orderId=${orderId}&price=${price}`,
+    //   })
+    // })
+
+
     wx.navigateTo({
       url: `/pages/submitorder/submitorder?orderId=${orderId}&couponId=${couponId}&price=${price}`,
     })
@@ -371,6 +423,18 @@ Page({
           couponId: unlimited_voucher[0].id,
         })
       }
+    })
+  },
+
+  deleteTraveller() {
+    q({
+      url: deleteTraveller,
+      method: 'delete',
+      data: {
+        orderId: this.data.orderId,
+      }
+    }).then(res => {
+      console.log('delete successfully');
     })
   },
 

@@ -25,6 +25,10 @@ Component({
       wx.navigateTo({
         url: `/pages/detail/detail?id=${id}`,
       })
+    },
+    deleteCartItem(e) {
+      var id = e.currentTarget.dataset.id;
+      this.triggerEvent('delete', {id, id});
     }
   }
 })

@@ -24,12 +24,16 @@ const getVoucherList = `${baseUrl}/voucher`;  // 优惠券列表
 
 const addToCart = id => `${baseUrl}/tourline/cart/${id}`;
 
+const deleteCartItem = id => `${baseUrl}/tourline/cart/${id}`;
+
 // 订单相关
 const payOrder = `${baseUrl}/order/tourline/pay`;  // 支付 
 
 const deleteOrder = id => `${baseUrl}/order/tourline/${id}`;   // 删除订单
 
 const addTraveller = `${baseUrl}/order/tourline/tourist`;   // 添加出行人
+
+const deleteTraveller = `${baseUrl}/order/tourline/tourist`; // 删除出行人
 
 const addContacter = `${baseUrl}/order/tourline/linkman`;   // 添加联系人
 
@@ -67,4 +71,6 @@ module.exports = {
   wechatLogin: wechatLogin,
   getSendCode: getSendCode,
   bindMobile: bindMobile,
+  deleteCartItem: deleteCartItem,
+  deleteTraveller: deleteTraveller,
 }

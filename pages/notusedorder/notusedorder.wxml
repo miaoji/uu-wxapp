@@ -1,6 +1,6 @@
 <!--pages/orderlist/orderlist.wxml-->
 <view class="list" wx:if="{{count}}">
-	<view class="item nopay" wx:for="{{nopaylist}}">
+	<view class="item nopay" wx:for="{{nopaylist}}" wx:if="{{type == 'nopay'}}">
 		<view class="date">
 			预订日期：{{ item.date }}
 		</view>
@@ -31,7 +31,8 @@
 			</view>
 		</view>
 	</view>
-	<view class="item" wx:for="{{list}}">
+	<block wx:if="{{list.length && type == 'waitpay'}}">
+		<view class="item" wx:for="{{list}}">
 		<view class="date">
 			预订日期：{{ item.date }}
 		</view>
@@ -60,6 +61,12 @@
 			</view>
 		</view>
 	</view>
+	</block>
+	<block wx:if="{{!list.length && type == 'waitpay'}}">
+		<view class="empty">
+			暂无未出行订单
+		</view>
+	</block>
 </view>
 
 <view class="empty" wx:else>

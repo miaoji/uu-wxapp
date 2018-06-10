@@ -64,6 +64,12 @@ Page({
     ],
     filterTypeName: '默认排序',
     animationData: '',
+    arrowTop: '../../static/imgs/category/arrow-up.png',
+    arrowTopSelect: '../../static/imgs/category/arrow-up-select.png',
+    arrowBottom: '../../static/imgs/category/arrow-down.png',
+    arrowBottomSelected: '../../static/imgs/category/arrow-down-select.png',
+    filter1Icon: '',
+    filter2Icon: '',
   },
 
   /**
@@ -100,7 +106,10 @@ Page({
     this.setData({
       range: typeId,
       typename: typename,
+      filter1Icon: this.data.arrowBottomSelected,
+      filter2Icon: this.data.arrowBottom,
     })
+
     this.getTourlines();
     this.goTop();
   },
@@ -238,24 +247,51 @@ Page({
       range: typeid,
       typename: typename,
       pageNo: 0,
+      filter1Icon: this.data.arrowBottomSelected,
     })
     this.resetPageState();
     this.getTourlines(true);
   },
 
   chooseOtherFilter() {
+    if(this.data.chooseTypeWrapper) {
+      this.hideFilterCoop();
+      this.resetPageState();
+      this.setData({
+        filterType: 2,
+        filter1Icon: this.data.arrowBottom,
+        filter2Icon: this.data.arrowBottomSelected,
+      })
+      return;
+    }
     this.setData({
       filterType: 2,
+      filter1Icon: this.data.arrowBottom,
+      filter2Icon: this.data.arrowTopSelect,
     })
 
     this.chooseType();
   },
 
   chooseTypeFilter() {
+    
+    if(this.data.chooseTypeWrapper) {
+      this.hideFilterCoop();
+      this.resetPageState();
+      this.setData({
+        filter1Icon: this.data.arrowBottomSelected,
+        filter2Icon: this.data.arrowBottom,
+      })
+      return;
+    }
+
     this.setData({
       filterType: 1,
+      filter1Icon: this.data.arrowTopSelect,
+      filter2Icon: this.data.arrowBottom,
     })
     this.chooseType();
+
   },
 
   handleChooseFilterType(e) {
@@ -265,6 +301,7 @@ Page({
     this.setData({
       filterTypeName: typename,
       pageNo: 0,
+      filter2Icon: this.data.arrowBottomSelected
     })
     this.resetPageState();
     this.getTourlines(true, order, sort);
@@ -312,6 +349,12 @@ Page({
     this.setData({
       chooseTypeWrapper: false,
     }) 
+  },
+
+  handleSearch() {
+    wx.navigateTo({
+      url: `/pages/search/search`
+    })
   }
 
 })

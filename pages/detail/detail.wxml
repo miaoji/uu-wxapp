@@ -74,7 +74,7 @@
 			wx:if="{{chooseLine}}">
 	<view class="c-content" catch:tap="catchBubble">
 		<view class="c-title">
-			选择行程
+			出行日期
 		</view>
 		<view class="c-list">
 			<view 

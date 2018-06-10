@@ -4,17 +4,27 @@
     <open-data type="userAvatarUrl" class="avatar-img"></open-data>
   </view>
   <view class="list">
-  	<view class="item" bind:tap="handleNopayList">
+  	<view class="item" bind:tap="handleWaitpayList">
   		<view class="title">
   			<image class="title-icon" src="{{orderIcon}}" mode="scaleToFill"></image>
   			<text>未出行订单</text>
   		</view>
   		<view class="arrow">
-        <text class="wait-pay" wx:if="{{haveWaitPay}}">待付款</text>
+        <!-- <text class="wait-pay" wx:if="{{haveWaitPay}}">待付款</text> -->
   			<image class="arrow-icon" src="{{arrowIcon}}" mode="scaleToFill"></image>
   		</view>
   	</view>
-    <view class="order" wx:if="{{haveFinish}}">
+    <view class="item" bind:tap="handleNopayList">
+      <view class="title">
+        <image class="title-icon" src="{{orderIcon}}" mode="scaleToFill"></image>
+        <text>待付款订单</text>
+      </view>
+      <view class="arrow">
+        <!-- <text class="wait-pay" wx:if="{{haveWaitPay}}">待付款</text> -->
+        <image class="arrow-icon" src="{{arrowIcon}}" mode="scaleToFill"></image>
+      </view>
+    </view>
+    <!-- <view class="order" wx:if="{{haveFinish}}">
       <view class="cards">
         <view class="date">
           {{ order.date }}
@@ -50,7 +60,7 @@
         <view>更</view>
         <view>多</view>
       </view>
-    </view>
+    </view> -->
   	<view class="item" bind:tap="handleOrderList">
   		<view class="title">
   			<image class="title-icon" src="{{historyIcon}}" mode="scaleToFill"></image>

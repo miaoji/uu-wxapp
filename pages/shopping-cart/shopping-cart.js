@@ -3,7 +3,7 @@
 const app = getApp()
 
 import { q } from '../../config/q'
-import { getShoppintCart } from '../../config/api'
+import { getShoppintCart, deleteCartItem } from '../../config/api'
 
 Page({
 
@@ -21,7 +21,7 @@ Page({
    */
   onLoad: function (options) {
     wx.setNavigationBarTitle({
-      title: '购物车',
+      title: '收藏',
     })
   },
 
@@ -106,6 +106,33 @@ Page({
           list: []
         })
       }
+    })
+  },
+  delete(e) {
+    var id = e.detail.id;
+    q({
+      url: deleteCartItem(id),
+      method: 'delete',
+      header: {
+        authorization: app.globalData.token,
+      },
+    }).then(res => {
+      wx.showToast({
+        title: '删除成功',
+        icon: 'none', // "success", "loading", "none"
+        duration: 1500,
+        mask: false,
+        success: (res) => {
+        },
+        fail: (res) => {
+          
+        },
+        complete: (res) => {
+          setTimeout(() => {
+            this.initShoppingCart();
+          }, 1500)
+        }
+      })
     })
   }
 })
