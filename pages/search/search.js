@@ -12,6 +12,7 @@ Page({
    */
   data: {
     searchIcon: '../../static/imgs/index/search.png',
+    deleteIcon: '../../static/imgs/search/delete.png',
     keyword: '',
     searchResult: [],
     showList: false,
@@ -38,16 +39,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var his = wx.getStorageSync('history');
-    if(!his) {
-      this.setData({
-        history: [],
-      })
-    }else {
-      this.setData({
-        history: JSON.parse(his),
-      })
-    }
+    this.getHistory();
   },
 
   /**
@@ -83,6 +75,19 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+
+  getHistory() {
+    var his = wx.getStorageSync('history');
+    if(!his) {
+      this.setData({
+        history: [],
+      })
+    }else {
+      this.setData({
+        history: JSON.parse(his),
+      })
+    }
   },
 
   bindKeyInput(e) {
@@ -155,5 +160,39 @@ Page({
         showList: true
       })
     })
-  }
+  },
+
+  deleteHistory() {
+    wx.showModal({
+      title: '确定删除所有历史搜索吗',
+      content: '',
+      showCancel: true,
+      cancelText: '取消',
+      cancelColor: '#000000',
+      confirmText: '确定',
+      confirmColor: '#70AAF4',
+      success: (res) => {
+        // res.confirm 为 true 时，表示用户点击了确定按钮
+        if(res.confirm) {
+          this.setHistoryNull();
+        }
+      },
+      fail: (res) => {
+        
+      },
+      complete: (res) => {
+        
+      }
+    })
+  },
+
+
+  setHistoryNull() {
+    try {
+        wx.setStorageSync('history', JSON.stringify([]));
+    } catch (e) {
+        
+    }
+    this.getHistory();
+  },
 })

@@ -117,7 +117,7 @@ Page({
           return {
             id: v.id,
             money: v.money,
-            endtime: this.formatTime(v.end_time),
+            endtime: this.formatTime(v.end_time * 1000),
           }
         })
         this.setData({

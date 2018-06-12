@@ -13,7 +13,10 @@
 		</view>
 	</view>
 	<view class="history" wx:if="{{history.length && !showList}}">
-		<view class="h-title">历史搜索</view>
+		<view class="h-title">
+			<text>历史搜索</text>
+			<image class="delete-icon" src="{{deleteIcon}}" mode="scaleToFill" bind:tap="deleteHistory"></image>
+		</view>
 		<view class="h-list">
 			<view class="h-item" wx:for="{{history}}" bind:tap="chooseHistory" data-item="{{item}}">
 				{{ item }}

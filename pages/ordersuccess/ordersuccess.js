@@ -118,7 +118,7 @@ Page({
       }
       var orderInfo = {
         oNumber: sn, 
-        time: this.formatPaytime(pay_time),
+        time: this.formatPaytime(pay_time * 1000),
         tourline: tourline_name,
         startTime: this.formatStartTime(start_time),
         endTime: this.formatEndTime(start_time),

@@ -109,7 +109,7 @@ Page({
         rows.forEach(v => {
           if(v.order_status == 1 && v.pay_status == 0) {
             nopaylist.push({
-              date: this.formatDate(v.pay_time),
+              date: this.formatDate(v.pay_time * 1000),
               image: v.image ? `${app.globalData.imageBase}${v.image.substring(1)}` : '',
               name: v.tourline_name,
               startDate: this.formatDate(v.start_time),
@@ -120,7 +120,7 @@ Page({
           }
           if(v.order_status == 1 && v.pay_status == 1) {
             list.push({
-              date: this.formatDate(v.pay_time),
+              date: this.formatDate(v.pay_time * 1000),
               image: v.image ? `${app.globalData.imageBase}${v.image.substring(1)}` : '',
               name: v.tourline_name,
               startDate: this.formatDate(v.start_time),
@@ -153,9 +153,15 @@ Page({
     var month = ts.getMonth() + 1;
     var date = ts.getDate();
     if(month > 9) {
-      return `${month}-${date}`;
+      if(date > 9) {
+        return `${month}-${date}`;
+      }
+      return `${month}-0${date}`;
     }else {
-      return `0${month}-${date}`;
+      if(date > 9) {
+        return `0${month}-${date}`;
+      }
+      return `0${month}-0${date}`;
     }
   },
 

@@ -3,7 +3,7 @@
 const app = getApp()
 
 import { q } from '../../config/q'
-import { orderDetail, getVoucherList, addContacter, addTraveller, makeOrder, deleteTraveller} from '../../config/api'
+import { orderDetail, getVoucherList, addContacter, addTraveller, makeOrder, deleteTraveller, getHomeInfo, getVoucher} from '../../config/api'
 
 Page({
 
@@ -46,6 +46,10 @@ Page({
     adult_count: '',
     child_count: '',
     idTypeArray: ['身份证', '护照', '军官证', '港澳通行证', '台胞证', '其他' ],
+    cangetcoupon: false,
+    showFlag: false,
+    animationData: {},
+    voucher: {},
   },
 
   /**
@@ -408,21 +412,77 @@ Page({
       let { limited_voucher, unlimited_voucher } = res.data.data;
       if(!limited_voucher.length && !unlimited_voucher.length) {
         this.setData({
-          couponName: '暂无优惠券'
+          couponName: '暂无优惠券',
         })
+        this.getHomeInfo();
       }else if(limited_voucher.length){
         this.setData({
           couponName: `-${limited_voucher[0].money / 100}`,
           price: this.data.basePrice - limited_voucher[0].money / 100,
           couponId: limited_voucher[0].id,
+          cangetcoupon: false,
         })
       }else if(unlimited_voucher.length) {
         this.setData({
           couponName: `-${unlimited_voucher[0].money / 100}`,
           price: this.data.basePrice - unlimited_voucher[0].money / 100,
           couponId: unlimited_voucher[0].id,
+          cangetcoupon: false,
         })
       }
+    })
+  },
+
+  getHomeInfo() {
+    q({
+      url: getHomeInfo,
+    }).then(res => {
+      console.log('couponse', res);
+      var { voucher } = res.data.data;
+      if(Object.keys(voucher).length) {
+        this.setData({
+          cangetcoupon: true,
+          voucher: Object.assign(voucher, {
+            status: 1,
+          })
+        })
+      }
+    })
+  },
+
+  getCoupon(e) {
+    let { id } = e.currentTarget.dataset;
+    if(this.data.voucher.status == 2) {
+      return;
+    }
+    q({
+      url: getVoucher,
+      method: 'post',
+      header: {
+        authorization: app.globalData.token,
+      },
+      data: {
+        id
+      }
+    }).then(res => {
+      wx.showToast({
+        title: '领取成功',
+        icon: 'success', // "success", "loading", "none"
+        duration: 1500,
+        mask: false,
+        success: (res) => {
+          this.setData({
+            'voucher.status': 2,
+          })
+          this.getVoucherList();
+        },
+        fail: (res) => {
+          
+        },
+        complete: (res) => {
+          
+        }
+      })
     })
   },
 
@@ -451,6 +511,47 @@ Page({
     _tmp = JSON.stringify(obj);
     result = JSON.parse(_tmp);
     return result;
-  } 
+  } ,
+
+  showModal () {
+    // 显示遮罩层
+    var animation = wx.createAnimation({
+      duration: 100,
+      timingFunction: "linear",
+      delay: 0
+    })
+    this.animation = animation
+    animation.translateY(300).step()
+    this.setData({
+      animationData: animation.export(),
+      showFlag: true
+    })
+    setTimeout(() => {
+      animation.translateY(0).step()
+      this.setData({
+        animationData: animation.export()
+      })
+    }, 200)
+  },
+  hideModal () {
+    // 隐藏遮罩层
+    var animation = wx.createAnimation({
+      duration: 100,
+      timingFunction: "linear",
+      delay: 0
+    })
+    this.animation = animation
+    animation.translateY(300).step()
+    this.setData({
+      animationData: animation.export(),
+    })
+    setTimeout(() => {
+      animation.translateY(0).step()
+      this.setData({
+        animationData: animation.export(),
+        showFlag: false
+      })
+    }, 200)
+  }
 
 })

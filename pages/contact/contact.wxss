@@ -77,7 +77,7 @@
 }
 
 .p-list .content {
-	width: 400rpx;
+	width: 600rpx;
 	height: auto;
 	position: absolute;
 	left: 50%;

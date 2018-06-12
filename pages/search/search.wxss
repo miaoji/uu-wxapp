@@ -61,6 +61,10 @@ page {
 
 .h-title {
 	padding-top: 20rpx;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
 }
 
 .h-list {
@@ -78,4 +82,9 @@ page {
 	text-align: center;
 	margin-right: 40rpx;
 	margin-bottom: 20rpx;
+}
+
+.delete-icon {
+	width: 44rpx;
+	height: 44rpx;
 }

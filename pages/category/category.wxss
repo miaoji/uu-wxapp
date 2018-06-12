@@ -52,7 +52,7 @@ page {
 
 .t-filter-wrap {
 	position: fixed;
-	top: 182rpx;
+	top: 165rpx;
 	left: 0;
 	width: 100%;
 	height: 100%;

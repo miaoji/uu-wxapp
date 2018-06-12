@@ -20,8 +20,8 @@
 
 <view class="p-list" wx:if="{{showModal}}" bind:tap="closeModal">
 	<view class="content">
-		<view class="p-item" wx:for="{{phoneNumbers}}" data-number="{{item}}" catch:tap="calling">
-			客服{{index + 1}}：{{ item }}
+		<view class="p-item" wx:for="{{phoneNumbers}}" data-number="{{item.number}}" catch:tap="calling">
+			{{item.name}}：{{ item.number }}
 		</view>
 	</view>
 </view>

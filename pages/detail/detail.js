@@ -6,7 +6,7 @@ const app = getApp()
 const wxParser = require('../../components/wxParser/index');
 
 import { q } from '../../config/q'
-import { getTourlineDetail, getTourlineDetailItem, addToCart, makeOrder } from '../../config/api'
+import { getTourlineDetail, getTourlineDetailItem, addToCart, makeOrder, deleteCartItem } from '../../config/api'
 
 Page({
 
@@ -17,6 +17,8 @@ Page({
     base: {},
     wechatIcon: '../../static/imgs/detail/contact.png',
     cartIcon: '../../static/imgs/detail/cart.png',
+    cartIconSelect: '../../static/imgs/detail/cart-select.png',
+    iconCurrent: '../../static/imgs/detail/cart.png',
     requestEnd: false,
     tourlineItem: [],
     clientHeight: 0,
@@ -53,7 +55,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    // this.initData(this.data.id);
   },
 
   /**
@@ -94,13 +96,16 @@ Page({
   initData: function(id) {
     q({
       url: getTourlineDetail(id),
+      header: {
+        authorization: app.globalData.token,
+      },
     }).then(res => {
       console.log(res, 'success');
       let detail = res.data && res.data.data;
       // let { }
       let { id, name, image, brief, sale, price,
             city_id, tourTotalDay,city_name,
-            tourDesc, appointDesc, priceExplain } = detail.tourline;
+            tourDesc, appointDesc, priceExplain, isCart } = detail.tourline;
       wx.setNavigationBarTitle({
         title: name,
       })
@@ -117,6 +122,7 @@ Page({
           city_name,
           priceExplain,
         },
+        iconCurrent: isCart ? this.data.cartIconSelect : this.data.cartIcon,
       })
       // 行程安排
       tourDesc = tourDesc.replace(/\.\/public\//g, `${app.globalData.imageBase}/public/`);
@@ -282,6 +288,12 @@ Page({
     return false;
   },
   addToCart() {
+    
+    if(this.data.iconCurrent == this.data.cartIconSelect) {
+      this.delete();
+      return;
+    }
+
     q({
       url: addToCart(this.data.id),
       method: 'post',
@@ -289,13 +301,44 @@ Page({
         authorization: app.globalData.token,
       }
     }).then(res => {
+      this.setData({
+        iconCurrent: this.data.cartIconSelect
+      })
       wx.showToast({
-        title: '加入购物车成功',
+        title: '收藏成功',
         icon: 'none', // "success", "loading", "none"
         duration: 1000,
         mask: false,
         success: (res) => {
           
+        },
+        fail: (res) => {
+          
+        },
+        complete: (res) => {
+          
+        }
+      })
+    })
+  },
+  delete(e) {
+    var id = this.data.id;
+    q({
+      url: deleteCartItem(id),
+      method: 'delete',
+      header: {
+        authorization: app.globalData.token,
+      },
+    }).then(res => {
+      this.setData({
+        iconCurrent: this.data.cartIcon
+      })
+      wx.showToast({
+        title: '取消成功',
+        icon: 'none', // "success", "loading", "none"
+        duration: 1500,
+        mask: false,
+        success: (res) => {
         },
         fail: (res) => {
           

@@ -29,7 +29,7 @@ Page({
         id: 2,
       },
       {
-        name: '爆款尾单',
+        name: '特价尾单',
         id: 3,
       }
     ],
@@ -62,6 +62,7 @@ Page({
         name: '销量从低到高'
       },
     ],
+    searchIcon: '../../static/imgs/index/search.png',
     filterTypeName: '默认排序',
     animationData: '',
     arrowTop: '../../static/imgs/category/arrow-up.png',
@@ -101,7 +102,7 @@ Page({
     }
     if(type == 'rest') {
       typeId = 2;
-      typename = '爆款尾单';
+      typename = '特价尾单';
     }
     this.setData({
       range: typeId,

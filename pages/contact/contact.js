@@ -7,7 +7,13 @@ Page({
   data: { 
     wechatIcon: '../../static/imgs/contact/wechat.png',
     phoneIcon: '../../static/imgs/contact/phone.png',
-    phoneNumbers: ['021-34141583','021-64753853'],
+    phoneNumbers: [{
+      name: '线路咨询',
+      number: '021-34141583'
+    },{
+      name: '售卡咨询',
+      number: '021-64753853'
+    }],
     showModal: false,
   },
 
@@ -45,7 +51,9 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-    
+    this.setData({
+      showModal: false,
+    })
   },
 
   /**

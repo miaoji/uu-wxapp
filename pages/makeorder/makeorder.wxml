@@ -137,6 +137,7 @@
 		<view class="left">
 			<image class="c-icon" src="{{couponIcon}}" mode="scaleToFill"></image>
 			<view class="coupon-name">优惠卡券</view>
+			<view class="g-coupon" wx:if="{{cangetcoupon}}" catch:tap="showModal">（点击领券）</view>
 		</view>
 		<view class="right">
 			<view class="drop-count">
@@ -164,3 +165,32 @@
 		</view>
 	</view>
 </scroll-view>
+
+
+<view class="commodity_screen" bindtap="hideModal" wx:if="{{showFlag}}"></view>
+<view animation="{{animationData}}" class="commodity_attr_box" wx:if="{{showFlag}}">
+	<view class="couponxx" bind:tap="getCoupon" data-id="{{voucher.id}}">
+      <view class="item {{voucher.status == 1 ? 'active-bg' : 'white-word noactive-bg'}}">
+      <view class="leftxx">
+        <view class="amount">
+          ￥{{ voucher.money / 100 }}
+        </view>
+        <view class="intro">
+          <view>代金券</view>
+          <view>全场任意使用</view>
+          <view class="redword">本券不可叠加使用</view>
+        </view>
+      </view>
+      <block wx:if="{{voucher.status == 1}}">
+        <view class="right first-right">
+          立即领取
+        </view>
+      </block>
+      <block wx:else>
+        <view class="right white-word">
+          已领取
+        </view>
+      </block>
+    </view>
+  </view>
+</view>

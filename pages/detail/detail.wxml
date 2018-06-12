@@ -57,7 +57,7 @@
 				<image class="cc-icon we-icon" src="{{wechatIcon}}" mode="scaleToFill"></image>
 			</view>
 			<view class="cc-cart" bind:tap="addToCart">
-				<image class="cc-icon" src="{{cartIcon}}" mode="scaleToFill"></image>
+				<image class="cc-icon" src="{{iconCurrent}}" mode="scaleToFill"></image>
 			</view>
 		</view>
 		<view class="buy" bind:tap="handleOrder">
