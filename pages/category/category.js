@@ -2,7 +2,7 @@
 const app = getApp()
 
 import { q } from '../../config/q'
-import { getTourlines } from '../../config/api'
+import { getTourlines, tourlineTypeList } from '../../config/api'
 
 let animationShowHeight = 300; 
 
@@ -20,20 +20,9 @@ Page({
     overflow: 'auto',
     chooseTypeWrapper: false,
     types: [
-      {
-        name: '国内中长线',
-        id: 1,
-      },
-      {
-        name: '国内短线',
-        id: 2,
-      },
-      {
-        name: '特价尾单',
-        id: 3,
-      }
+      
     ],
-    typename: '国内中长线',
+    typename: '',
     filterType: 1,
     filterTypes: [
       {
@@ -94,23 +83,12 @@ Page({
    */
   onShow: function () { 
     var type = app.globalData.globalCategory;
-    var typeId = 1,
-        typename = '国内中长线';
-    if(type == 'short') {
-      typeId = 2;
-      typename = '国内短线';
-    }
-    if(type == 'rest') {
-      typeId = 2;
-      typename = '特价尾单';
-    }
     this.setData({
-      range: typeId,
-      typename: typename,
+      range: type,
       filter1Icon: this.data.arrowBottomSelected,
       filter2Icon: this.data.arrowBottom,
     })
-
+    this.tourlineTypeList();
     this.getTourlines();
     this.goTop();
   },
@@ -124,8 +102,8 @@ Page({
     this.setData({
       filterTypeName: '默认排序',
       filterType: 1,
-      typename: '国内中长线',
-      range: 1,
+      typename: this.data.types[0].name,
+      range: this.data.types[0].id,
     })
   },
 
@@ -323,24 +301,6 @@ Page({
 
 
   showFilterCoop() {
-    // var animation = wx.createAnimation({  
-    //   duration: 200,  
-    //   timingFunction: "ease",  
-    //   delay: 0  
-    // })  
-    // this.animation = animation;  
-    // animation.translateY(animationShowHeight).step()  
-    // this.setData({  
-    //   animationData: animation.export(),  
-    // })  
-    // setTimeout(function () {  
-    //   animation.translateY(0).step()  
-    //   this.setData({  
-    //     animationData: animation.export(),  
-    //     chooseTypeWrapper: true  
-    //   })  
-    // }.bind(this), 200) 
-
     this.setData({
       chooseTypeWrapper: true,
     }) 
@@ -355,6 +315,24 @@ Page({
   handleSearch() {
     wx.navigateTo({
       url: `/pages/search/search`
+    })
+  },
+
+  tourlineTypeList() {
+    q({
+      url: tourlineTypeList,
+    }).then(res => {
+      let { cate } = res.data.data;
+      cate.map(v => {
+        if(v.id == this.data.range) {
+          this.setData({
+            typename: v.name,
+          })
+        }
+      })
+      this.setData({
+        types: cate,
+      })
     })
   }
 

@@ -1,8 +1,10 @@
 // put api list here
-const baseUrl = 'https://wwlin.cn/api'
+const baseUrl = 'https://lyh.uu-club.com/api'
 
 // 所有接口列表如下：
 const getHomeInfo = `${baseUrl}/home`;
+
+const tourlineTypeList = `${baseUrl}/tourline`;
 
 const getTourlineDetail = id => `${baseUrl}/tourline/${id}`;
 
@@ -73,4 +75,5 @@ module.exports = {
   bindMobile: bindMobile,
   deleteCartItem: deleteCartItem,
   deleteTraveller: deleteTraveller,
+  tourlineTypeList: tourlineTypeList,
 }

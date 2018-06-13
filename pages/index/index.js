@@ -3,7 +3,7 @@
 const app = getApp()
 
 import { q } from '../../config/q'
-import { getHomeInfo, getVoucher } from '../../config/api'
+import { getHomeInfo, getVoucher, tourlineTypeList } from '../../config/api'
 
 Page({
   data: {
@@ -26,9 +26,11 @@ Page({
     recommendCommon: [],
     voucher: {},
     voucherCount: 0,
+    typeList: [],
   },
   onLoad: function () {
     this.initData();
+    this.tourlineTypeList();
   },
   initData() {
     q({
@@ -123,10 +125,21 @@ Page({
     })
   },
   handCategory(e) {
-    var type = e.currentTarget.dataset.type;
+    var type = e.currentTarget.dataset.id;
     app.globalData.globalCategory = type;
     wx.switchTab({
       url: `/pages/category/category`
+    })
+  },
+
+  tourlineTypeList() {
+    q({
+      url: tourlineTypeList,
+    }).then(res => {
+      let { cate } = res.data.data;
+      this.setData({
+        typeList: cate,
+      })
     })
   }
 

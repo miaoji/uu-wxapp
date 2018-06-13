@@ -84,7 +84,10 @@ Page({
 
   initShoppingCart() {
     q({
-      url: getShoppintCart
+      url: getShoppintCart,
+      header: {
+        authorization: app.globalData.token,
+      }
     }).then(res => {
       let result = res.data.data.tourline.rows;
       if(result.length) {
