@@ -105,6 +105,7 @@ Page({
       typename: this.data.types[0].name,
       range: this.data.types[0].id,
     })
+    app.globalData.globalCategory = 0;
   },
 
   /**

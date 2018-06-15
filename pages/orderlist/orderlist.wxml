@@ -4,7 +4,7 @@
 		<view class="date">
 			预订日期：{{ item.date }}
 		</view>
-		<view class="card">
+		<view class="card" bind:tap="handleDetail" data-id="{{item.tourline_id}}">
 			<view class="img">
 				<image class="timage" src="{{ item.image }}" mode="scaleToFill"></image>
 			</view>

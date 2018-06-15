@@ -40,7 +40,7 @@
   <!-- coupon  优惠券-->
 
   <view class="coupon" bind:tap="getCoupon" data-id="{{voucher.id}}">
-      <view class="item {{voucher.status == 1 ? 'active-bg' : 'white-word noactive-bg'}}">
+      <view class="item active-bg">
       <view class="left">
         <view class="amount">
           ￥{{ voucher.money / 100 }}

@@ -28,8 +28,8 @@ Page({
     selectlineId: '',
     adult_sale_price: 0,
     child_sale_price: 0,
-    adultCount: 1,
-    childCount: 1,
+    adultCount: 0,
+    childCount: 0,
   },
 
   /**

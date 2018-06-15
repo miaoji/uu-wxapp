@@ -129,6 +129,7 @@ Page({
               orderNo: v.id,
               adult: v.adult_count,
               child: v.child_count,
+              tourline_id: v.tourline_id,
             }) 
           }
         })
@@ -205,6 +206,13 @@ Page({
     var id = e.currentTarget.dataset.orderno;
     wx.navigateTo({
       url: `/pages/submitorder/submitorder?orderId=${id}&from=list`
+    })
+  },
+
+  handleDetail(e) {
+    var id = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: `/pages/detail/detail?id=${id}`,
     })
   }
 })

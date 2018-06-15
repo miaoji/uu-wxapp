@@ -103,6 +103,7 @@ Page({
               tour_total_day: v.tour_total_day || 0,
               price: v.total_price !== 0 ? v.total_price / 100 : '',
               orderNo: v.id,
+              tourline_id: v.tourline_id,
             })
           }
         })
@@ -164,5 +165,12 @@ Page({
     }else {
       return `0${month}-${date}`;
     }
+  },
+
+  handleDetail(e) {
+    var id = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: `/pages/detail/detail?id=${id}`,
+    })
   }
 })
