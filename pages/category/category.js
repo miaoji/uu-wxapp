@@ -83,6 +83,12 @@ Page({
    */
   onShow: function () { 
     var type = app.globalData.globalCategory;
+    if(type) {
+      this.setData({
+        list: [],
+        pageNo: 0,
+      })
+    }
     this.setData({
       range: type,
       filter1Icon: this.data.arrowBottomSelected,
@@ -90,7 +96,7 @@ Page({
     })
     this.tourlineTypeList();
     this.getTourlines();
-    this.goTop();
+    // this.goTop();
   },
 
   /**
