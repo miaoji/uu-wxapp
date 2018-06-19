@@ -142,6 +142,10 @@ Page({
         typeList: cate,
       })
     })
+  },
+
+  onShareAppMessage: function () {
+  
   }
 
 })
