@@ -13,7 +13,7 @@ Page({
    */
   data: {
     list: [],
-    range: 1,
+    range: 7,
     pageSize: 20,
     pageNo: 0,
     clientHeight: 'auto',
@@ -155,8 +155,9 @@ Page({
   // 1: 国内长线, 2: 国内中线,3: 周边短线  range
   getTourlines(reset, order, sort) {
     let ps = this.data.pageSize || 20,
-        range = this.data.range || 1,
+        range = this.data.range || 7,
         pn = this.data.pageNo || 0;
+
     let url = '';
     if(reset) {
       this.setData({

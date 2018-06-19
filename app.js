@@ -1,11 +1,12 @@
 //app.js
 
-import { wechatLogin } from './config/api.js'
+import { wechatLogin, tourlineTypeList } from './config/api.js'
 import { q } from './config/q'
 
 App({
   onLaunch: function () {
     this.checkUpdate();
+    this.tourlineTypeList();
     // 登录
     wx.login({
       success: res => {
@@ -80,10 +81,21 @@ App({
     })
   },
 
+  tourlineTypeList() {
+    q({
+      url: tourlineTypeList,
+    }).then(res => {
+      let { cate } = res.data.data;
+      this.globalData.globalCategory = cate[0].id;
+    })
+  },
+
+
+
   globalData: {
     userInfo: null,
     imageBase: 'http://i.uu-club.com',
-    globalCategory: 'long',  // 为了解决 switchTab 无法传参的问题
+    globalCategory: '7',  // 为了解决 switchTab 无法传参的问题
     token: '',
   },
 })

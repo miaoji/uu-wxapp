@@ -127,6 +127,7 @@ Page({
   handCategory(e) {
     var type = e.currentTarget.dataset.id;
     app.globalData.globalCategory = type;
+    console.log(type, 'type')
     wx.switchTab({
       url: `/pages/category/category`
     })
