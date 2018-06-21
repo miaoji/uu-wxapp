@@ -10,13 +10,13 @@
 
 .swiper-item {
 	display: block;
-	height: 364rpx;
+	height: 100%;
 }
 
 
 .slide-image {
 	width: 100%;
-	height: 364rpx;
+	height: 100%;
 }
 
 .search {
