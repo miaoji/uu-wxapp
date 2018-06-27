@@ -125,8 +125,16 @@ Page({
         iconCurrent: isCart ? this.data.cartIconSelect : this.data.cartIcon,
       })
       // 行程安排
+      
       tourDesc = tourDesc.replace(/\.\/public\//g, `${app.globalData.imageBase}/public/`);
       appointDesc = appointDesc.replace(/\.\/public\//g, `${app.globalData.imageBase}/public/`);
+
+      console.log(appointDesc)
+
+      tourDesc = tourDesc.replace(/^<p style="font-family:" color:#565556;"="">/g, '')
+
+      appointDesc = tourDesc.replace(/^<p style="font-family:" color:#565556;"="">/g, '')
+
       this.setData({
         requestEnd: true,
       })
