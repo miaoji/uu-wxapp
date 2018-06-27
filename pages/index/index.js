@@ -27,6 +27,7 @@ Page({
     voucher: {},
     voucherCount: 0,
     typeList: [],
+    hasMobile: false,
   },
   onLoad: function () {
     this.initData();
@@ -90,8 +91,36 @@ Page({
       url: `/pages/search/search`
     })
   },
+
+  judgeHasMoBile() {
+    try {
+      var value = wx.getStorageSync('usermobile')
+      if (value) {
+         this.getCoupon()
+      }else {
+        this.setData({
+          hasMobile: true,
+        })
+      }
+    } catch (e) {
+      // Do something when catch error
+    }
+  },
+
+  bindSuccss() {
+    this.closeModal();
+    this.getCoupon();
+  },
+
+  closeModal() {
+    this.setData({
+      hasMobile: false,
+    })
+  },
+
   getCoupon(e) {
-    let { id } = e.currentTarget.dataset;
+    console.log('yes, ,,,')
+    let { id } = this.data.voucher;
     if(this.data.voucher.status == 2) {
       return;
     }

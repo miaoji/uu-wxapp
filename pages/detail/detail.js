@@ -3,7 +3,10 @@
 //获取应用实例
 const app = getApp()
 
-const wxParser = require('../../components/wxParser/index');
+// const wxParser = require('../../components/wxParser/index');
+
+var WxParse = require('../../utils/wxParse/wxParse.js');
+
 
 import { q } from '../../config/q'
 import { getTourlineDetail, getTourlineDetailItem, addToCart, makeOrder, deleteCartItem } from '../../config/api'
@@ -129,27 +132,38 @@ Page({
       tourDesc = tourDesc.replace(/\.\/public\//g, `${app.globalData.imageBase}/public/`);
       appointDesc = appointDesc.replace(/\.\/public\//g, `${app.globalData.imageBase}/public/`);
 
-      console.log(appointDesc)
+      tourDesc = tourDesc.replace(/^<p style="font-family:" color:#565556;"="">/g, '\n')
 
-      tourDesc = tourDesc.replace(/^<p style="font-family:" color:#565556;"="">/g, '')
+      appointDesc = tourDesc.replace(/^<p style="font-family:" color:#565556;"="">/g, '\n')
 
-      appointDesc = tourDesc.replace(/^<p style="font-family:" color:#565556;"="">/g, '')
+      var str = `1<span style="font-size: 16px;" font-size:16px;line-height:2;background-color:#ffffff;"="">2`
+
+      tourDesc = tourDesc.replace(/<.*"="">/, "\n")
+
+      appointDesc = appointDesc.replace(/<.*"="">/, "\n")
 
       this.setData({
         requestEnd: true,
       })
-      wxParser.parse({
-        bind: 'xc',
-        html: tourDesc,
-        target: this,
-        enablePreviewImage: false, // 禁用图片预览功能
-      });
-      wxParser.parse({
-        bind: 'yd',
-        html: appointDesc,
-        target: this,
-        enablePreviewImage: false, // 禁用图片预览功能
-      });
+
+      var that = this
+
+      WxParse.wxParse('tourDesc', 'html', tourDesc, that, 5);
+
+      WxParse.wxParse('appointDesc', 'html', appointDesc, that, 5);
+
+      // wxParser.parse({
+      //   bind: 'xc',
+      //   html: tourDesc,
+      //   target: this,
+      //   enablePreviewImage: false, // 禁用图片预览功能
+      // });
+      // wxParser.parse({
+      //   bind: 'yd',
+      //   html: appointDesc,
+      //   target: this,
+      //   enablePreviewImage: false, // 禁用图片预览功能
+      // });
     })
   },
   getTourlineDetailItem() {

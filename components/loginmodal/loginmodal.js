@@ -28,7 +28,7 @@ Component({
    */
   methods: {
     close() {
-
+      this.triggerEvent('close')
     },
     getSendCode() {
       if(this.data.phone == '') {
@@ -43,7 +43,10 @@ Component({
         method: 'post',
         data: {
           mobile: this.data.phone
-        }
+        },
+        header: {
+          authorization: app.globalData.token,
+        },
       }).then(res => {
         wx.showToast({
           title: '发送成功',
@@ -87,12 +90,20 @@ Component({
         data: {
           mobile: this.data.phone,
           code: this.data.code,
-        }
+        },
+        header: {
+          authorization: app.globalData.token,
+        },
       }).then(res => {
+        try {
+            wx.setStorageSync('usermobile', this.data.phone)
+        } catch (e) {    
+        }
         wx.showToast({
           title: '绑定成功',
           icon: 'none', // "success", "loading", "none"
         })
+        this.triggerEvent('success')
       })
     }
   }

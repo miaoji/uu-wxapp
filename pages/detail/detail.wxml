@@ -1,4 +1,5 @@
-<import src="../../components/wxParser/index.wxml"/>
+<!-- <import src="../../components/wxParser/index.wxml"/> -->
+<import src="../../utils/wxParse/wxParse.wxml"/>
 
 <view class="d-wrap">
 	<view class="intro">
@@ -39,11 +40,12 @@
 	</view>
 
 	<view class="html-c">
-		<template is="wxParser" data="{{ wxParserData:xc.nodes }}"/>
+		<!-- <template is="wxParser" data="{{ wxParserData:xc.nodes }}"/> -->
+    <template is="wxParse" data="{{wxParseData:tourDesc.nodes}}"/>
 	</view>
 
 	<view class="html-c">
-		<template is="wxParser" data="{{ wxParserData:yd.nodes }}"/>
+		 <template is="wxParse" data="{{wxParseData:appointDesc.nodes}}"/>
 	</view>
 
 	<view class="jg"></view>

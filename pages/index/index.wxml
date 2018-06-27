@@ -39,7 +39,7 @@
 
   <!-- coupon  优惠券-->
 
-  <view class="coupon" bind:tap="getCoupon" data-id="{{voucher.id}}">
+  <view class="coupon" bind:tap="judgeHasMoBile" data-id="{{voucher.id}}">
       <view class="item active-bg">
       <view class="left">
         <view class="amount">
@@ -116,7 +116,8 @@
   	</view>
   </view>
 </view>
-<!-- <loginmodal></loginmodal>   -->
-
+<block wx:if="{{hasMobile}}">
+	<loginmodal bind:close="closeModal" bind:success="bindSuccss"></loginmodal>
+</block>
 
 
