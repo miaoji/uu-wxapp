@@ -1,5 +1,5 @@
-<!-- <import src="../../components/wxParser/index.wxml"/> -->
-<import src="../../utils/wxParse/wxParse.wxml"/>
+<import src="../../components/wxParser/index.wxml"/>
+<!-- <import src="../../utils/wxParse/wxParse.wxml"/> -->
 
 <view class="d-wrap">
 	<view class="intro">
@@ -21,9 +21,6 @@
 				<text class="real-price">
 					￥{{ base.price }}
 				</text>
-				<text class="up-price">
-					起
-				</text>
 			</view>
 			<view class="price">
 				销量：{{ base.sale }}
@@ -40,12 +37,13 @@
 	</view>
 
 	<view class="html-c">
-		<!-- <template is="wxParser" data="{{ wxParserData:xc.nodes }}"/> -->
-    <template is="wxParse" data="{{wxParseData:tourDesc.nodes}}"/>
+		<template is="wxParser" data="{{ wxParserData:xc.nodes }}"/>
+    	<!-- <template is="wxParse" data="{{wxParseData:tourDesc.nodes}}"/> -->
 	</view>
 
 	<view class="html-c">
-		 <template is="wxParse" data="{{wxParseData:appointDesc.nodes}}"/>
+		<template is="wxParser" data="{{ wxParserData:yd.nodes }}"/>
+		<!-- <template is="wxParse" data="{{wxParseData:appointDesc.nodes}}"/>-->
 	</view>
 
 	<view class="jg"></view>

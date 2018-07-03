@@ -3,7 +3,7 @@
 const app = getApp()
 
 import { q } from '../../config/q'
-import { getHomeInfo, getVoucher, tourlineTypeList } from '../../config/api'
+import { getHomeInfo, getVoucher, tourlineTypeList, getUserInfo} from '../../config/api'
 
 Page({
   data: {
@@ -93,18 +93,7 @@ Page({
   },
 
   judgeHasMoBile() {
-    try {
-      var value = wx.getStorageSync('usermobile')
-      if (value) {
-         this.getCoupon()
-      }else {
-        this.setData({
-          hasMobile: true,
-        })
-      }
-    } catch (e) {
-      // Do something when catch error
-    }
+    this.getUserInfo();
   },
 
   bindSuccss() {
@@ -172,6 +161,29 @@ Page({
       })
     })
   },
+
+  getUserInfo() {
+    q({
+      url: getUserInfo,
+      header: {
+        authorization: app.globalData.token,
+      },
+    }).then(res => {
+      console.log('res ', res)
+      // this.setData({
+      //   hasMobile: true,
+      // })
+      let { user } = res.data.data;
+      let { is_effect } = user;
+      if(is_effect) {
+        this.getCoupon();
+      }else {
+        this.setData({
+          hasMobile: true,
+        })
+      }
+    })
+  },  
 
   onShareAppMessage: function () {
   

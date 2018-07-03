@@ -5,6 +5,7 @@
 	top: 0;
 	left: 0;
 	background-color: rgba(0, 0, 0, .4);
+	z-index: 2000;
 }
 
 .modal {
@@ -17,6 +18,7 @@
 	transform: translate(-50%, -50%);
 	box-shadow: 0 2rpx 16rpx 0 rgba(53,53,53,0.2);
 	border-radius: 10rpx;
+	z-index: 2000;
 }
 
 .close {

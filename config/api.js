@@ -53,6 +53,8 @@ const getSendCode = `${baseUrl}/user/sendCode`;   // 发送验证码
 
 const bindMobile = `${baseUrl}/user/bindMobile`;   // 绑定手机号
 
+const getUserInfo = `${baseUrl}/user/info`;
+
 module.exports = {
   getHomeInfo: getHomeInfo,
   getTourlineDetail: getTourlineDetail,
@@ -76,4 +78,5 @@ module.exports = {
   deleteCartItem: deleteCartItem,
   deleteTraveller: deleteTraveller,
   tourlineTypeList: tourlineTypeList,
+  getUserInfo: getUserInfo,
 }
